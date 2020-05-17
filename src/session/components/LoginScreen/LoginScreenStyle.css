@@ -1,0 +1,47 @@
+.page {
+    padding: 2% 2% 2% 2%;
+    text-align: center;
+}
+.homeContainer {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.titleContainer {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+}
+
+.homeCard {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: lightskyblue;
+    width:97%;
+}
+
+.homeCardTitle {
+    text-align: center;
+    font-size: 70px;
+    color: white;
+    margin-top: 20px;
+}
+
+.googleLogin {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 12px;
+    width: 10%;
+    height: 30px;
+    margin: 30% auto;
+    display: block;
+}
+
+.googleButton {
+    margin-top: 20%;
+    margin-bottom: 20%;
+}
