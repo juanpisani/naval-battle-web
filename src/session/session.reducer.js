@@ -5,8 +5,8 @@ const initialState = {
     user        : {},
     isLoggedIn  : false,
     loginStatus: {
-        success: false,
-        error: false
+        success : false,
+        error   : false
     }
 };
 

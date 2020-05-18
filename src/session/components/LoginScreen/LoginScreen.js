@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {Card} from "react-bootstrap";
 import './LoginScreenStyle.css';
 import GoogleLogin from "react-google-login";
+import 'bootstrap/dist/css/bootstrap.css';
 
 class LoginScreen extends Component {
 

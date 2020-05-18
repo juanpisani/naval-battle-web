@@ -1,4 +1,5 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux';
+import reduxThunk from 'redux-thunk';
 
 import sessionReducer from "./session/session.reducer";
 import sessionMiddleware from "./session/session.middleware";
@@ -8,8 +9,9 @@ const appReducer = combineReducers({
 });
 
 let middleware = [
+    reduxThunk,
     sessionMiddleware,
-]
+];
 
 const store = createStore(
     appReducer,

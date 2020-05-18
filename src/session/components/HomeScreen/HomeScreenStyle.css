@@ -32,16 +32,7 @@
     margin-top: 20px;
 }
 
-.googleLogin {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    border-radius: 12px;
-    width: 10%;
-    height: 30px;
-    margin: 30% auto;
-    display: block;
-}
-
-.googleButton {
-    margin-top: 20%;
-    margin-bottom: 20%;
+.margins {
+    margin-top: 10%;
+    margin-bottom: 10%;
 }
