@@ -22,5 +22,5 @@ export const sessionActions = {
     registerToPlayResponse: (response) =>  ({type: REGISTER_TO_PLAY_RESPONSE, response: response}),
     registerToPlayError: (error) =>  ({type: REGISTER_TO_PLAY_ERROR, error: error}),
 
-    startGame: () => ({type: START_GAME}),
+    startGame: (playerOne, playerTwo) => ({type: START_GAME, playerOne: playerOne, playerTwo: playerTwo}),
 };

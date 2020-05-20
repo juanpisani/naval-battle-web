@@ -36,12 +36,13 @@ class WebSocketService {
     socketNewMessage(data) {
         const parsedData = JSON.parse(data);
         const command = parsedData.command;
+        debugger;
         if (Object.keys(this.callbacks).length === 0) {
             return;
         }
         if (command === 'game_start') {
             console.log(parsedData.message);
-            this.callbacks[command]();
+            this.callbacks[command](parsedData.player_1, parsedData.player_2);
         }
         if (command === 'waiting') {
             console.log(parsedData.message);

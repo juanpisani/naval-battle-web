@@ -23,6 +23,14 @@ const initialState = {
     game: {
         id: "",
         opponentReady: false,
+        playerOne: {
+            id: "",
+            email: "",
+        },
+        playerTwo: {
+            id: "",
+            email: "",
+        }
     }
 };
 
@@ -66,11 +74,14 @@ const session = (state = initialState, action) => {
                 game: {id : action.type === REGISTER_TO_PLAY_RESPONSE && action.response.data.game_session_id},
             };
         case START_GAME:
+            debugger;
             return {
                 ...state,
                 game:{
                     ...state.game,
                     opponentReady: true,
+                    playerOne: action.playerOne,
+                    playerTwo: action.playerTwo,
                 }
             };
 

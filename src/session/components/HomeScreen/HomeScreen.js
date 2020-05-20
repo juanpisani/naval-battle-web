@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 class HomeScreen extends Component {
 
+    //todo logout
     componentWillMount() {
         !this.props.isLoggedIn && this.props.history.push("/");
     }

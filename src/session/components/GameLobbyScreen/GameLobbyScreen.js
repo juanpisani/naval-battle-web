@@ -33,8 +33,9 @@ export default class GameLobbyScreen extends Component {
             }, 100);
     }
 
-    startGameCallback(){
-        this.props.startGame();
+    startGameCallback(playerOne, playerTwo){
+        debugger;
+        this.props.startGame(playerOne, playerTwo);
         console.log("GAME STARTED")
     }
 
@@ -46,6 +47,13 @@ export default class GameLobbyScreen extends Component {
         return (
             <div>
                 <h1>{this.props.opponentReady ? "CONNECTED": "WAITING"}</h1>
+                <div>
+                    {this.props.opponentReady &&
+                    <div>
+                        <p>PLAYER 1: {this.props.playerOne.email}</p>
+                        <p>PLAYER 2: {this.props.playerTwo.email}</p>
+                    </div>}
+                </div>
             </div>
         );
     }

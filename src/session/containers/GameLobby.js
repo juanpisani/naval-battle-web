@@ -9,11 +9,13 @@ const mapStateToProps = (state, ownProps) => ({
     isLoggedIn      :   state.session.isLoggedIn,
     registerToPlayStatus : state.session.registerToPlayStatus,
     opponentReady   : state.session.game.opponentReady,
+    playerOne       : state.session.game.playerOne,
+    playerTwo       : state.session.game.playerTwo
 });
 
 const mapDispatchToProps = dispatch => ({
-    startGame:() => {
-        dispatch(sessionActions.startGame());
+    startGame:(playerOne, playerTwo) => {
+        dispatch(sessionActions.startGame(playerOne, playerTwo));
     }
 });
 
