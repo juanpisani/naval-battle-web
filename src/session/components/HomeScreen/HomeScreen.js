@@ -6,13 +6,20 @@ import 'bootstrap/dist/css/bootstrap.css';
 class HomeScreen extends Component {
 
     componentWillMount() {
-        !this.props.isLoggedIn && this.props.history.push("/")
-        console.log(this.props)
+        !this.props.isLoggedIn && this.props.history.push("/");
     }
 
-    handleClick(){
-        this.props.history.push("/game")
+    async handleClick() {
+        this.props.registerToPlay(this.props.token);
+        this.sleep(500).then(()=> {
+            this.props.registerToPlayStatus.success && this.props.history.push("/gameLobby");
+        })
     }
+
+    sleep (time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
+
 
     render() {
         let {user} = this.props;

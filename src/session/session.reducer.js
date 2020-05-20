@@ -1,12 +1,28 @@
-import {BACKEND_LOGIN_ERROR, BACKEND_LOGIN_RESPONSE} from "./session.actions";
+import {
+    BACKEND_LOGIN_ERROR,
+    BACKEND_LOGIN_RESPONSE,
+    REGISTER_TO_PLAY_ERROR,
+    REGISTER_TO_PLAY_REQUEST,
+    REGISTER_TO_PLAY_RESPONSE,
+    START_GAME
+} from "./session.actions";
 
 const initialState = {
-    token       : undefined,
-    user        : {},
-    isLoggedIn  : false,
+    token: undefined,
+    user: {},
+    isLoggedIn: false,
     loginStatus: {
-        success : false,
-        error   : false
+        success: false,
+        error: false
+    },
+    registerToPlayStatus:{
+        success: false,
+        error: false,
+        loading: false,
+    },
+    game: {
+        id: "",
+        opponentReady: false,
     }
 };
 
@@ -37,6 +53,28 @@ const session = (state = initialState, action) => {
                     error: true
                 }
             };
+        case REGISTER_TO_PLAY_REQUEST:
+        case REGISTER_TO_PLAY_RESPONSE:
+        case REGISTER_TO_PLAY_ERROR:
+            return {
+                ...state,
+                registerToPlayStatus: {
+                    success : action.type === REGISTER_TO_PLAY_RESPONSE,
+                    error   : action.type === REGISTER_TO_PLAY_ERROR && action.error,
+                    loading : action.type === REGISTER_TO_PLAY_REQUEST
+                },
+                game: {id : action.type === REGISTER_TO_PLAY_RESPONSE && action.response.data.game_session_id},
+            };
+        case START_GAME:
+            return {
+                ...state,
+                game:{
+                    ...state.game,
+                    opponentReady: true,
+                }
+            }
+
+
         default:
             return state
     }

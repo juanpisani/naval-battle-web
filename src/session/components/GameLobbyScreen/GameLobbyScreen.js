@@ -4,17 +4,22 @@ import React, {Component} from "react";
 export default class GameLobbyScreen extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
-        WebSocketInstance.connect();
+        console.log(this.props.registerToPlayStatus);
+        console.log("room id " + this.props.roomId);
+        WebSocketInstance.connect(this.props.roomId);
         this.waitForSocketConnection(() => {
-            WebSocketInstance.addCallbacks(this.addGame.bind(this));
-            WebSocketInstance.registerToPlay(this.props.user);
+            WebSocketInstance.addCallbacks();
+            WebSocketInstance.sendMessageConnected(this.props.user.id, this.props.roomId);
+            WebSocketInstance.addCallbacks(this.startGameCallback.bind(this));
+            // WebSocketInstance.registerToPlay(this.props.user);
         });
     }
 
     componentWillMount() {
-        !this.props.isLoggedIn && this.props.history.push("/")
-    }
+        !this.props.isLoggedIn && this.props.history.push("/");
+        // console.log("constructos" + props.roomId)
+        // this.state = {};
+        }
 
     waitForSocketConnection(callback) {
         const component = this;
@@ -32,19 +37,14 @@ export default class GameLobbyScreen extends Component {
             }, 100);
     }
 
-
-    addGame(game) {
-        this.setState({ game: game});
-    }
-
-    getMessage(message) {
-        this.setState({ message: message});
+    startGameCallback(){
+        this.props.startGame();
     }
 
     render() {
         return (
             <div>
-                <h1>WAITING</h1>
+                <h1>{this.props.opponentReady ? "CONNECTED": "WAITING"}</h1>
             </div>
         );
     }

@@ -15,8 +15,8 @@ class WebSocketService {
         this.socketRef = null;
     }
 
-    connect() {
-        const path = config.API_PATH;
+    connect(roomId) {
+        const path = config.API_PATH + roomId + "/";
         this.socketRef = new WebSocket(path);
         this.socketRef.onopen = () => {
             console.log('WebSocket open');
@@ -24,13 +24,12 @@ class WebSocketService {
         this.socketRef.onmessage = e => {
             this.socketNewMessage(e.data);
         };
-
         this.socketRef.onerror = e => {
             console.log(e.message);
         };
         this.socketRef.onclose = () => {
             console.log("WebSocket closed let's reopen");
-            this.connect();
+            this.connect(roomId);
         };
     }
 
@@ -40,18 +39,25 @@ class WebSocketService {
         if (Object.keys(this.callbacks).length === 0) {
             return;
         }
-        if (command === 'add_game') {
+        if (command === 'start_game') {
             this.callbacks[command](parsedData.message);
+        }
+        if (command === 'waiting') {
+            console.log(parsedData.message);
         }
     }
 
-
-    registerToPlay(username) {
-        this.sendMessage({ command: 'ready_to_play', username: username });
+    sendMessageConnected(roomId, userId) {
+        this.sendMessage({ command: 'connected', roomId: roomId, userId: userId})
     }
 
-    addCallbacks(addGame) {
-        this.callbacks['add_game'] = addGame;
+
+    // registerToPlay(username) {
+    //     this.sendMessage({ command: 'ready_to_play', username: username });
+    // }
+
+    addCallbacks(startGameCallBack) {
+        this.callbacks['start_game'] = startGameCallBack;
     }
 
     sendMessage(data) {
