@@ -4,14 +4,10 @@ import React, {Component} from "react";
 export default class GameLobbyScreen extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props.registerToPlayStatus);
-        console.log("room id " + this.props.roomId);
         WebSocketInstance.connect(this.props.roomId);
         this.waitForSocketConnection(() => {
-            WebSocketInstance.addCallbacks();
-            WebSocketInstance.sendMessageConnected(this.props.user.id, this.props.roomId);
-            WebSocketInstance.addCallbacks(this.startGameCallback.bind(this));
-            // WebSocketInstance.registerToPlay(this.props.user);
+            WebSocketInstance.sendMessageConnected(this.props.roomId, this.props.user.id);
+            WebSocketInstance.addCallbacks(this.startGameCallback.bind(this), this.waitingCallBack.bind(this));
         });
     }
 
@@ -39,6 +35,11 @@ export default class GameLobbyScreen extends Component {
 
     startGameCallback(){
         this.props.startGame();
+        console.log("GAME STARTED")
+    }
+
+    waitingCallBack(){
+        this.console.log("WAITING")
     }
 
     render() {

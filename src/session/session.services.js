@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const baseUrl = "http://localhost:8000/api/";
+//todo arreglar token y hhttputils
 
 export const services = {
     backEndLogin: (token) =>  axios.post(baseUrl + 'google/login/', {id_token: token}),

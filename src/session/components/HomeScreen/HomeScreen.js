@@ -11,6 +11,7 @@ class HomeScreen extends Component {
 
     async handleClick() {
         this.props.registerToPlay(this.props.token);
+        //todo al hacer el redirect en el middleware no pasarian estas cosas
         this.sleep(500).then(()=> {
             this.props.registerToPlayStatus.success && this.props.history.push("/gameLobby");
         })

@@ -39,8 +39,9 @@ class WebSocketService {
         if (Object.keys(this.callbacks).length === 0) {
             return;
         }
-        if (command === 'start_game') {
-            this.callbacks[command](parsedData.message);
+        if (command === 'game_start') {
+            console.log(parsedData.message);
+            this.callbacks[command]();
         }
         if (command === 'waiting') {
             console.log(parsedData.message);
@@ -56,8 +57,9 @@ class WebSocketService {
     //     this.sendMessage({ command: 'ready_to_play', username: username });
     // }
 
-    addCallbacks(startGameCallBack) {
-        this.callbacks['start_game'] = startGameCallBack;
+    addCallbacks(startGameCallBack, waitingCallBack) {
+        this.callbacks['game_start'] = startGameCallBack;
+        this.callbacks['waiting'] = waitingCallBack;
     }
 
     sendMessage(data) {

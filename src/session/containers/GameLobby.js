@@ -8,6 +8,7 @@ const mapStateToProps = (state, ownProps) => ({
     roomId          :   state.session.game.id,
     isLoggedIn      :   state.session.isLoggedIn,
     registerToPlayStatus : state.session.registerToPlayStatus,
+    opponentReady   : state.session.game.opponentReady,
 });
 
 const mapDispatchToProps = dispatch => ({

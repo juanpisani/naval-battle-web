@@ -72,7 +72,7 @@ const session = (state = initialState, action) => {
                     ...state.game,
                     opponentReady: true,
                 }
-            }
+            };
 
 
         default:
