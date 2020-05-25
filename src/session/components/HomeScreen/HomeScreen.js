@@ -30,7 +30,9 @@ class HomeScreen extends Component {
                 <div className="titleContainer">
                     <Card className="homeCard">
                         <Card.Body>
-                            <Card.Title className="homeCardTitle">Naval battle</Card.Title>
+                            <Card.Title className="homeCardTitle">
+                                <p style={{color:"blue"}}>Naval battle</p>
+                            </Card.Title>
                             <Card.Title className="homeCardTitle">Home</Card.Title>
                             <div className="margins">
                                 <h1 style={{color:"white"}}>WELCOME {user.firstName?.toUpperCase()} {user.lastName?.toUpperCase()}</h1>

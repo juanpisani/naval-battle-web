@@ -20,16 +20,28 @@ const initialState = {
         error: false,
         loading: false,
     },
+    // game: {
+    //     id: "",
+    //     opponentReady: false,
+    //     playerOne: {
+    //         id: "",
+    //         email: "",
+    //     },
+    //     playerTwo: {
+    //         id: "",
+    //         email: "",
+    //     }
+    // }
     game: {
-        id: "",
-        opponentReady: false,
+        id: "999999",
+        opponentReady: true,
         playerOne: {
-            id: "",
-            email: "",
+            id: "10000",
+            email: "player1@mail.com",
         },
         playerTwo: {
-            id: "",
-            email: "",
+            id: "10001",
+            email: "player2@mail.com",
         }
     }
 };
