@@ -10,44 +10,44 @@ export default class GameLobbyScreen extends Component {
     constructor(props) {
         console.log(props);
         super(props);
-        WebSocketInstance.connect(this.props.roomId);
-        this.waitForSocketConnection(() => {
-            WebSocketInstance.sendMessageConnected(this.props.roomId, this.props.user.id);
-            WebSocketInstance.addCallbacks(this.startGameCallback.bind(this), this.waitingCallBack.bind(this));
-        });
+        // WebSocketInstance.connect(this.props.roomId);
+        // this.waitForSocketConnection(() => {
+        //     WebSocketInstance.sendMessageConnected(this.props.roomId, this.props.user.id);
+        //     WebSocketInstance.addCallbacks(this.startGameCallback.bind(this), this.waitingCallBack.bind(this));
+        // });
     }
 
-    componentWillMount() {
-        !this.props.isLoggedIn && this.props.history.push("/");
-        // console.log("constructos" + props.roomId)
-        // this.state = {};
-        }
+    // componentWillMount() {
+    //     !this.props.isLoggedIn && this.props.history.push("/");
+    //     // console.log("constructos" + props.roomId)
+    //     // this.state = {};
+    //     }
 
-    waitForSocketConnection(callback) {
-        const component = this;
-        setTimeout(
-            function(){
-                if(WebSocketInstance.state() === 1){
-                    console.log('Connection is made');
-                    callback();
-                    return;
-                }
-                else{
-                    console.log("Waiting for connection..");
-                    component.waitForSocketConnection(callback);
-                }
-            }, 100);
-    }
+    // waitForSocketConnection(callback) {
+    //     const component = this;
+    //     setTimeout(
+    //         function(){
+    //             if(WebSocketInstance.state() === 1){
+    //                 console.log('Connection is made');
+    //                 callback();
+    //                 return;
+    //             }
+    //             else{
+    //                 console.log("Waiting for connection..");
+    //                 component.waitForSocketConnection(callback);
+    //             }
+    //         }, 100);
+    // }
 
-    startGameCallback(playerOne, playerTwo){
-        debugger;
-        this.props.startGame(playerOne, playerTwo);
-        console.log("GAME STARTED")
-    }
+    // startGameCallback(playerOne, playerTwo){
+    //     debugger;
+    //     this.props.startGame(playerOne, playerTwo);
+    //     console.log("GAME STARTED")
+    // }
 
-    waitingCallBack(){
-        this.console.log("WAITING")
-    }
+    // waitingCallBack(){
+    //     this.console.log("WAITING")
+    // }
 
     render() {
         return (

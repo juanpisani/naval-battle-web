@@ -3,6 +3,7 @@ import Login from "./session/containers/Login";
 import { BrowserRouter as Router, Switch, Route, } from 'react-router-dom';
 import Home from "./session/containers/Home";
 import GameLobby from "./session/containers/GameLobby";
+import SetPieces from "./session/containers/SetPieces";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
                     <Route exact path='/' component={Login}/>
                     <Route exact path='/home' component={Home}/>
                     <Route exact path='/gameLobby' component={GameLobby}/>
+                    <Route exact path='/setPieces' component={SetPieces}/>
                 </Switch>
             </Router>
         </div>
