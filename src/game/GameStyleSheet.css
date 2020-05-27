@@ -25,6 +25,7 @@
 }
 
 .piece {
+    position: absolute;
     background: blue;
     border: 2px solid white;
     border-radius: 10%;
