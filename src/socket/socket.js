@@ -54,9 +54,9 @@ class WebSocketService {
     }
 
 
-    // registerToPlay(username) {
-    //     this.sendMessage({ command: 'ready_to_play', username: username });
-    // }
+    sendBoard(board, userId) {
+        this.sendMessage({ command: 'boards', userId: userId });
+    }
 
     addCallbacks(startGameCallBack, waitingCallBack) {
         this.callbacks['game_start'] = startGameCallBack;

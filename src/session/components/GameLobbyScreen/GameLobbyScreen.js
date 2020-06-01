@@ -40,11 +40,10 @@ export default class GameLobbyScreen extends Component {
     }
 
     startGameCallback(playerOne, playerTwo){
-        debugger;
         this.props.startGame(playerOne, playerTwo);
         this.sleep(500).then(()=> {
             this.props.history.push("/setPieces");
-        })
+        });
         console.log("GAME STARTED")
     }
 

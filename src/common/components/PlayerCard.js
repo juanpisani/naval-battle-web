@@ -1,6 +1,6 @@
 import React from "react";
 import {Card} from "react-bootstrap";
-import "./PlayerCardStyle.css";
+import "./styles/PlayerCardStyle.css";
 
 
 export const PlayerCard = (player) => {

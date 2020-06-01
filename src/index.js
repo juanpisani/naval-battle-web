@@ -4,6 +4,7 @@ import App from './App';
 import store from './store';
 import { Provider } from 'react-redux';
 import {sessionActions} from "./session/session.actions";
+import {gameActions} from "./game/game.actions";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -17,4 +18,5 @@ ReactDOM.render(
 
 export default {
     session         : sessionActions,
+    game            : gameActions,
 }
