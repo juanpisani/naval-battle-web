@@ -8,10 +8,10 @@ import "./GameLobbyScreenStyle.css";
 export default class GameLobbyScreen extends Component {
     //TODO TENER EL ID DE LA SESSION EN LA URL PARA PODER JUGAR VARIOS JUEGOS Y REFRESHEAR
     constructor(props) {
-        console.log(props);
         super(props);
         WebSocketInstance.connect(this.props.roomId);
         this.waitForSocketConnection(() => {
+            //todo borrar este
             WebSocketInstance.sendMessageConnected(this.props.roomId, this.props.user.id);
             WebSocketInstance.addCallbacks(this.startGameCallback.bind(this), this.waitingCallBack.bind(this));
         });
@@ -19,9 +19,7 @@ export default class GameLobbyScreen extends Component {
 
     componentWillMount() {
         !this.props.isLoggedIn && this.props.history.push("/");
-        // console.log("constructos" + props.roomId)
-        // this.state = {};
-        }
+    }
 
     waitForSocketConnection(callback) {
         const component = this;
@@ -39,9 +37,13 @@ export default class GameLobbyScreen extends Component {
             }, 100);
     }
 
+    sleep (time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
+
     startGameCallback(playerOne, playerTwo){
         this.props.startGame(playerOne, playerTwo);
-        this.sleep(500).then(()=> {
+        this.sleep(3000).then(()=> {
             this.props.history.push("/setPieces");
         });
         console.log("GAME STARTED")
@@ -64,7 +66,7 @@ export default class GameLobbyScreen extends Component {
                                     {this.props.opponentReady ?
                                         <div>
                                             <Card.Title
-                                                className="homeCardTitle">GAME {this.props.roomId.toUpperCase()}
+                                                className="homeCardTitle">GAME {this.props.roomId}
                                             </Card.Title>
                                             <div style={{display: "flex", justifyContent: "space-between", flexDirection: "row"}}>
                                                 <PlayerCard player={this.props.playerOne} />

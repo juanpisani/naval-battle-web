@@ -47,20 +47,25 @@ class WebSocketService {
         if (command === 'waiting') {
             console.log(parsedData.message);
         }
+        if (command === 'boards_ready'){
+            console.log(parsedData.message);
+            this.callbacks[command](parsedData.player_1_board, parsedData.player_1_id,
+                parsedData.player_2_board, parsedData.player_2_id);
+        }
     }
 
     sendMessageConnected(roomId, userId) {
         this.sendMessage({ command: 'connected', roomId: roomId, userId: userId})
     }
 
-
-    sendBoard(board, userId) {
-        this.sendMessage({ command: 'boards', userId: userId });
+    sendBoard(roomId, board, userId) {
+        this.sendMessage({ command: 'boards', roomId: roomId, userId: userId, board:board});
     }
 
-    addCallbacks(startGameCallBack, waitingCallBack) {
+    addCallbacks(startGameCallBack, waitingCallBack, boardsReadyCallBack) {
         this.callbacks['game_start'] = startGameCallBack;
         this.callbacks['waiting'] = waitingCallBack;
+        this.callbacks['boards_ready'] = boardsReadyCallBack;
     }
 
     sendMessage(data) {

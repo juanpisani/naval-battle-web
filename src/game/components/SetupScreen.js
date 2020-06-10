@@ -17,50 +17,36 @@ export class SetupScreen extends Component {
 
     constructor(props) {
         super(props);
-        WebSocketInstance.connect(this.props.roomId);
-        this.waitForSocketConnection(() => {
-            WebSocketInstance.sendMessageConnected(this.props.roomId, this.props.user.id);
-            WebSocketInstance.addCallbacks(this.waitingCallBack.bind(this));
-        });
+        WebSocketInstance.addCallbacks(this.waitingCallBack.bind(this), this.boardsReadyCallBack.bind(this));
     }
 
-    waitForSocketConnection(callback) {
-        const component = this;
-        setTimeout(
-            function(){
-                if(WebSocketInstance.state() === 1){
-                    console.log('Connection is made');
-                    callback();
-                    return;
-                }
-                else{
-                    console.log("Waiting for connection..");
-                    component.waitForSocketConnection(callback);
-                }
-            }, 100);
-    }
-
-    sendBoard(ships, userId){
-        // todo send message
-        //command    boards
-        //     {
-        //         "userId": 12,
-        //         "board": [
-        //             {"extreme1": "A1", "extreme2": "A4"},
-        //             {"extreme1": "C5", "extreme2": "F5"},
-        //             {"extreme1": "B6", "extreme2": "B9"}
-        //          ]
-        //     }
+    sendBoard(roomId, ships, userId){
         const board = this.getPositionJson(ships);
-        this.props.sendBoard(board, userId);
+        debugger;
+        this.props.sendBoard(roomId, board, userId);
         console.log("BOARD SENT")
     }
 
     getPositionJson(ships) {
         let board = [];
         ships.forEach((ship) => {
-            board.push({'extreme1': ship.getExtreme1(), 'extreme2': ship.getExtreme2()})
-        })
+            board.push({'extreme1': ship.getExtreme1(), 'extreme2': ship.getExtreme2()});
+        });
+        return board
+    }
+
+    sleep (time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
+
+    boardsReadyCallBack(player1Board, player1Id, player2Board, player2Id){
+        player1Id === this.props.userId ? this.props.gameStarted(player1Board, player2Board) :
+            player2Id === this.props.userId ? this.props.gameStarted(player2Board, player1Board) :
+                console.log("Error receiving");
+        this.sleep(500).then(()=> {
+            // this.props.boardsReady ? this.props.history.push("/game") : null;
+            this.props.boardsReady && this.props.history.push("/game");
+        });
     }
 
     waitingCallBack(){
@@ -76,6 +62,9 @@ export class SetupScreen extends Component {
             this.updateCells();
         } else if (prevState.currentShip !== this.state.currentShip) {
             this.updateCells();
+        }
+        if (prevState.hasSent){
+            console.log("YA ENVIE")
         }
     }
 
@@ -129,7 +118,7 @@ export class SetupScreen extends Component {
     };
 
     handlePlayClick = () => {
-        this.sendBoard(this.state.ships)
+        this.sendBoard(this.props.roomId, this.state.ships, this.props.userId)
     };
 
     render() {

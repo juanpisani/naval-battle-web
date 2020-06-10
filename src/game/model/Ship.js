@@ -20,13 +20,13 @@ class Ship extends Position {
     }
 
     getExtreme1(){
-        return String.fromCharCode(this.y + 65) + this.x;
+        return String.fromCharCode(this.y + 64) + this.x;
     }
 
     getExtreme2(){
         return this.orientation === Orientation.Horizontal ?
-            String.fromCharCode(this.y + 65) + (this.x + this.length) :
-            String.fromCharCode(this.y + this.length + 65) + (this.x)
+            String.fromCharCode(this.y + 64) + (this.x + this.length - 1 ) :
+            String.fromCharCode(this.y + this.length - 1 + 64) + (this.x)
     }
 
     rotate() {
