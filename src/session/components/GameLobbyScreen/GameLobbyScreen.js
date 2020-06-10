@@ -61,7 +61,7 @@ export default class GameLobbyScreen extends Component {
                         <Card className="homeCard">
                             <Card.Body>
                                 <Card.Title className="homeCardTitle">
-                                    <p style={{color:"blue"}}>Naval battle</p>
+                                    <p style={{color:"blue"}}>Battleship</p>
                                 </Card.Title>
                                     {this.props.opponentReady ?
                                         <div>

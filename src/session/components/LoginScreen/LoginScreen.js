@@ -28,7 +28,7 @@ class LoginScreen extends Component {
                     <Card className="homeCard">
                         <Card.Body>
                             <Card.Title className="homeCardTitle">
-                                <p style={{color:"blue"}}>Naval battle</p>
+                                <p style={{color:"blue"}}>Battleship</p>
                             </Card.Title>
                             <div className="googleButton">
                                 <GoogleLogin
