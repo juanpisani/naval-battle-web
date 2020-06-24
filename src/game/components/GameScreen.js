@@ -13,18 +13,17 @@ export class GameScreen extends Component {
 
     render() {
         return (
-            <div className="page">
-                <div className="homeContainer">
-                    <div className="titleContainer">
-                        <Card className="homeCard">
+            <div>
+                <div>
+                    <div>
+                        <Card>
                             <Card.Body>
-                                <Card.Title className="homeCardTitle">
-                                    <p style={{color:"blue"}}>Naval battle</p>
+                                <Card.Title>
+                                    <p style={{color:"blue"}}>BATTLESHIPS</p>
                                 </Card.Title>
                                 {this.props.ownBoard  && this.props.opponentBoard ?
                                     <div>
-                                        <Card.Title
-                                            className="homeCardTitle">GAME {this.props.roomId}
+                                        <Card.Title>GAME {this.props.roomId}
                                         </Card.Title>
                                         <div style={{display: "flex", justifyContent: "space-between", flexDirection: "row"}}>
                                             <p>READY</p>

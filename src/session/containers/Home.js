@@ -8,11 +8,12 @@ const mapStateToProps = (state, ownProps) => ({
     token           :   state.session.token,
     isLoggedIn      :   state.session.isLoggedIn,
     registerToPlayStatus :   state.session.registerToPlayStatus,
+    socket          :   state.session.socket,
 });
 
 const mapDispatchToProps = dispatch => ({
-    registerToPlay: (token) => {
-        dispatch(sessionActions.registerToPlayRequest(token));
+    saveSocketInReducer: (socket) => {
+        dispatch(sessionActions.saveSocketInReducer(socket));
     }
 });
 

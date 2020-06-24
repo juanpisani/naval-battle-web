@@ -3,13 +3,14 @@ import {
     BACKEND_LOGIN_RESPONSE,
     REGISTER_TO_PLAY_ERROR,
     REGISTER_TO_PLAY_REQUEST,
-    REGISTER_TO_PLAY_RESPONSE,
+    REGISTER_TO_PLAY_RESPONSE, SAVE_SOCKET,
     START_GAME
 } from "./session.actions";
 
 const initialState = {
     token: undefined,
     user: {},
+    socket: {},
     isLoggedIn: false,
     loginStatus: {
         success: false,
@@ -20,44 +21,43 @@ const initialState = {
         error: false,
         loading: false,
     },
-    // game: {
-    //     id: "",
-    //     opponentReady: false,
-    //     playerOne: {
-    //         id: "",
-    //         email: "",
-    //     },
-    //     playerTwo: {
-    //         id: "",
-    //         email: "",
-    //     }
-    // }
     game: {
-        id: "999999",
-        opponentReady: true,
+        id: "",
+        opponentReady: false,
         playerOne: {
-            id: "10000",
-            email: "player1@mail.com",
+            id: "",
+            email: "",
         },
         playerTwo: {
-            id: "10001",
-            email: "player2@mail.com",
+            id: "",
+            email: "",
         }
-    },
+    }
+    // game: {
+    //     id: "999999",
+    //     opponentReady: true,
+    //     playerOne: {
+    //         id: "10000",
+    //         email: "player1@mail.com",
+    //     },
+    //     playerTwo: {
+    //         id: "10001",
+    //         email: "player2@mail.com",
+    //     }
+    // },
 };
 
 const session = (state = initialState, action) => {
     switch (action.type) {
         case BACKEND_LOGIN_RESPONSE:
-            const user = action.response.data.user;
+            const user = action.response.data;
             return {
                 ...state,
                 token: action.response.data.token,
                 user:{
-                    firstName: user.first_name,
-                    lastName: user.last_name,
+                    name: user.name,
                     email: user.email,
-                    id: user.id
+                    id: user.user_id
                 },
                 loginStatus: {
                     success: true,
@@ -86,7 +86,6 @@ const session = (state = initialState, action) => {
                 game: {id : action.type === REGISTER_TO_PLAY_RESPONSE && action.response.data.game_session_id},
             };
         case START_GAME:
-            debugger;
             return {
                 ...state,
                 game:{
@@ -94,10 +93,14 @@ const session = (state = initialState, action) => {
                     opponentReady: true,
                     playerOne: action.playerOne,
                     playerTwo: action.playerTwo,
+                    id: action.gameId
                 }
             };
-
-
+        case SAVE_SOCKET:
+            return{
+                ...state,
+                socket: action.socket
+            };
         default:
             return state
     }

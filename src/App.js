@@ -6,7 +6,6 @@ import GameLobby from "./session/containers/GameLobby";
 import Setup from "./game/containers/Setup";
 import Game from "./game/containers/Game";
 
-
 function App() {
   return (
       <>

@@ -1,14 +1,13 @@
 import React from "react";
 import {Card} from "react-bootstrap";
-import "./styles/PlayerCardStyle.css";
 
 
 export const PlayerCard = (player) => {
-    return (<Card className="playerCard">
+    return (<Card>
         <Card.Body>
-            <Card.Title className="playerCardTitle">Player</Card.Title>
-            <Card.Title className="playerCardTitle">{player.player.name}</Card.Title>
-            <Card.Title className="playerCardTitle">{player.player.email}</Card.Title>
+            <Card.Title>Player</Card.Title>
+            <Card.Title>{player.player.name}</Card.Title>
+            <Card.Title>{player.player.email}</Card.Title>
         </Card.Body>
     </Card>)
 };

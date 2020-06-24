@@ -1,7 +1,9 @@
 import React, {Component} from "react";
 import {Button, Card} from "react-bootstrap";
-import './HomeScreenStyle.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import config from "../../../config";
+import io from 'socket.io-client';
+
 
 class HomeScreen extends Component {
 
@@ -11,32 +13,37 @@ class HomeScreen extends Component {
     }
 
     async handleClick() {
-        this.props.registerToPlay(this.props.token);
-        //todo al hacer el redirect en el middleware no pasarian estas cosas
-        this.sleep(500).then(()=> {
-            this.props.registerToPlayStatus.success && this.props.history.push("/gameLobby");
-        })
+        const user_id = this.props.user.id;
+        const socket = io(config.API_PATH);
+        const saveSocketInReducer = this.props.saveSocketInReducer;
+        const history = this.props.history;
+        socket.on('connect', function() {
+            saveSocketInReducer(this);
+            socket.emit('connect_player', {user_id: user_id});
+        });
+        socket.on('connected_player', function(msg){
+            console.log('connected_player', msg);
+            history.push("/gameLobby");
+        });
+        // socket.on('ready_to_start', function(msg){
+        //     console.log('ready_to_start', msg);
+        // });
     }
-
-    sleep (time) {
-        return new Promise((resolve) => setTimeout(resolve, time));
-    }
-
 
     render() {
         let {user} = this.props;
-        return (<div className="page">
-            <div className="homeContainer">
-                <div className="titleContainer">
-                    <Card className="homeCard">
+        return (<div>
+            <div>
+                <div>
+                    <Card>
                         <Card.Body>
-                            <Card.Title className="homeCardTitle">
+                            <Card.Title>
                                 <p style={{color:"blue"}}>Battleship</p>
                             </Card.Title>
-                            <Card.Title className="homeCardTitle">Home</Card.Title>
-                            <div className="margins">
-                                <h1 style={{color:"white"}}>WELCOME {user.firstName?.toUpperCase()} {user.lastName?.toUpperCase()}</h1>
-                                <Button className="margins" variant="light" size="lg" onClick={() => this.handleClick()}>
+                            <Card.Title>Home</Card.Title>
+                            <div>
+                                <h1 style={{color:"white"}}>WELCOME {user.name?.toUpperCase()}</h1>
+                                <Button variant="light" size="lg" onClick={() => this.handleClick()}>
                                     <h3 style={{color:"lightskyblue"}}>PLAY</h3>
                                 </Button>
                             </div>

@@ -6,7 +6,6 @@ import Ship from "../model/Ship";
 import Cell from "../model/Cell";
 import './styles/GameStyle.css'
 import {Card} from "react-bootstrap";
-import WebSocketInstance from "../../socket/socket";
 
 export class SetupScreen extends Component {
     state = {
@@ -15,15 +14,9 @@ export class SetupScreen extends Component {
         cells: Cell.generate()
     };
 
-    constructor(props) {
-        super(props);
-        WebSocketInstance.addCallbacks(this.waitingCallBack.bind(this), this.boardsReadyCallBack.bind(this));
-    }
-
-    sendBoard(roomId, ships, userId){
+    sendBoard(gameId, ships, userId){
         const board = this.getPositionJson(ships);
-        debugger;
-        this.props.sendBoard(roomId, board, userId);
+        this.props.socket.emit('setup_board', {user_id: userId, game_id: gameId, board:board});
         console.log("BOARD SENT")
     }
 
@@ -35,23 +28,19 @@ export class SetupScreen extends Component {
         return board
     }
 
-    sleep (time) {
-        return new Promise((resolve) => setTimeout(resolve, time));
-    }
+    // sleep (time) {
+    //     return new Promise((resolve) => setTimeout(resolve, time));
+    // }
 
-    boardsReadyCallBack(player1Board, player1Id, player2Board, player2Id){
-        player1Id === this.props.userId ? this.props.gameStarted(player1Board, player2Board) :
-            player2Id === this.props.userId ? this.props.gameStarted(player2Board, player1Board) :
-                console.log("Error receiving");
-        this.sleep(500).then(()=> {
-            // this.props.boardsReady ? this.props.history.push("/game") : null;
-            this.props.boardsReady && this.props.history.push("/game");
-        });
-    }
-
-    waitingCallBack(){
-        this.console.log("WAITING")
-    }
+    // boardsReadyCallBack(player1Board, player1Id, player2Board, player2Id){
+    //     player1Id === this.props.userId ? this.props.gameStarted(player1Board, player2Board) :
+    //         player2Id === this.props.userId ? this.props.gameStarted(player2Board, player1Board) :
+    //             console.log("Error receiving");
+    //     this.sleep(500).then(()=> {
+    //         // this.props.boardsReady ? this.props.history.push("/game") : null;
+    //         this.props.boardsReady && this.props.history.push("/game");
+    //     });
+    // }
 
     componentDidMount() {
         this.updateCells();
@@ -118,7 +107,7 @@ export class SetupScreen extends Component {
     };
 
     handlePlayClick = () => {
-        this.sendBoard(this.props.roomId, this.state.ships, this.props.userId)
+        this.sendBoard(this.props.gameId, this.state.ships, this.props.userId)
     };
 
     render() {
@@ -126,17 +115,16 @@ export class SetupScreen extends Component {
 
         return (
 
-            <div className="page">
-                <div className="homeContainer">
-                    <div className="titleContainer">
-                        <Card className="homeCard">
+            <div>
+                <div>
+                    <div>
+                        <Card>
                             <Card.Body>
-                                <Card.Title className="homeCardTitle">
-                                    <p style={{color:"blue"}}>Naval battle</p>
+                                <Card.Title>
+                                    <p style={{color:"blue"}}>BATTLESHIPS</p>
                                 </Card.Title>
                                     <div>
-                                        <Card.Title
-                                            className="homeCardTitle">SETUP
+                                        <Card.Title>SETUP
                                         </Card.Title>
                                         <div className="page v-container">
                                             <div className="h-container">
