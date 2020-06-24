@@ -21,6 +21,7 @@ const sessionMiddleware = ({ dispatch, getState }) => next => {
                 console.log(action);
                 break;
             case REGISTER_TO_PLAY_REQUEST:
+                debugger;
                 services.registerToPlay(action.token)
                     .then((response) => {
                         dispatch(actions.session.registerToPlayResponse(response));

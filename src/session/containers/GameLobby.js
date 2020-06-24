@@ -10,7 +10,7 @@ const mapStateToProps = (state, ownProps) => ({
     registerToPlayStatus : state.session.registerToPlayStatus,
     opponentReady   : state.session.game.opponentReady,
     playerOne       : state.session.game.playerOne,
-    playerTwo       : state.session.game.playerTwo
+    playerTwo       : state.session.game.playerTwo,
 });
 
 const mapDispatchToProps = dispatch => ({

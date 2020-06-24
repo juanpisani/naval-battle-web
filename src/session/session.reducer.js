@@ -43,7 +43,7 @@ const initialState = {
             id: "10001",
             email: "player2@mail.com",
         }
-    }
+    },
 };
 
 const session = (state = initialState, action) => {

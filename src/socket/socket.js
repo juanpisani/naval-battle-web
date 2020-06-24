@@ -55,11 +55,11 @@ class WebSocketService {
     }
 
     sendMessageConnected(roomId, userId) {
-        this.sendMessage({ command: 'connected', roomId: roomId, userId: userId})
+        this.sendMessage({ command: 'connected', message: {'roomId': roomId, 'userId': userId}})
     }
 
     sendBoard(roomId, board, userId) {
-        this.sendMessage({ command: 'boards', roomId: roomId, userId: userId, board:board});
+        this.sendMessage({ command: 'boards' ,message: {'roomId': roomId, 'userId': userId, 'board': board}});
     }
 
     addCallbacks(startGameCallBack, waitingCallBack, boardsReadyCallBack) {
@@ -81,24 +81,24 @@ class WebSocketService {
         return this.socketRef?.readyState;
     }
 
-    waitForSocketConnection(callback){
-        const socket = this.socketRef;
-        const recursion = this.waitForSocketConnection;
-        setTimeout(
-            function () {
-                if (socket.readyState === 1) {
-                    console.log("Connection is made")
-                    if(callback != null){
-                        callback();
-                    }
-                    return;
-
-                } else {
-                    console.log("wait for connection...")
-                    recursion(callback);
-                }
-            }, 1); // wait 5 milisecond for the connection...
-    }
+    // waitForSocketConnection(callback){
+    //     const socket = this.socketRef;
+    //     const recursion = this.waitForSocketConnection;
+    //     setTimeout(
+    //         function () {
+    //             if (socket.readyState === 1) {
+    //                 console.log("Connection is made")
+    //                 if(callback != null){
+    //                     callback();
+    //                 }
+    //                 return;
+    //
+    //             } else {
+    //                 console.log("wait for connection...")
+    //                 recursion(callback);
+    //             }
+    //         }, 1); // wait 5 milisecond for the connection...
+    // }
 }
 
 const WebSocketInstance = WebSocketService.getInstance();
