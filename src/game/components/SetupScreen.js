@@ -14,6 +14,16 @@ export class SetupScreen extends Component {
         cells: Cell.generate()
     };
 
+    componentWillMount() {
+        !this.props.isLoggedIn && this.props.history.push("/");
+        this.props.socket.on('users_boards_received', function(msg){
+            console.log('users_boards_received', msg);
+        });
+        this.props.socket.on('boards_ready', function(msg){
+            console.log('boards_ready', msg);
+        });
+    }
+
     sendBoard(gameId, ships, userId){
         const board = this.getPositionJson(ships);
         this.props.socket.emit('setup_board', {user_id: userId, game_id: gameId, board:board});

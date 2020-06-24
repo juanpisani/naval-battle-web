@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "https://ac16b8c47d1e.ngrok.io/api/";
+const baseUrl = "http://127.0.0.1:5000/api/";
 
 //todo arreglar token y hhttputils
 
