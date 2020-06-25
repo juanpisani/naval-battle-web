@@ -7,7 +7,8 @@ const mapStateToProps = (state, ownProps) => ({
     gameId            :   state.session.game.id,
     hasSent           :   state.game.hasSent,
     boardsReady       :   state.game.boardsReady,
-    socket            :   state.session.socket
+    socket            :   state.session.socket,
+    isLoggedIn        :   state.session.isLoggedIn,
 });
 
 const mapDispatchToProps = dispatch => ({

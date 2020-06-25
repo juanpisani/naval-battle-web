@@ -21,7 +21,6 @@ export default class GameLobbyScreen extends Component {
             console.log('ready_for_setup', msg);
             history.push("/setPieces")
         });
-
     }
 
     readyToPlay(userId, gameId) {
