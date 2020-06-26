@@ -13,8 +13,8 @@ const mapDispatchToProps = dispatch => ({
     updateDisposition: (positions) => {
         dispatch(gameActions.updateDisposition(positions))
     },
-    gameStarted:(ownCells, ownShips, opponentCells) => {
-        dispatch(gameActions.gameStarted(ownCells, ownShips, opponentCells));
+    gameStarted:(ownCells, opponentCells) => {
+        dispatch(gameActions.gameStarted(ownCells, opponentCells));
     }
 });
 

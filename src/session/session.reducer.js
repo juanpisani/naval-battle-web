@@ -1,9 +1,7 @@
 import {
     BACKEND_LOGIN_ERROR,
     BACKEND_LOGIN_RESPONSE,
-    REGISTER_TO_PLAY_ERROR,
-    REGISTER_TO_PLAY_REQUEST,
-    REGISTER_TO_PLAY_RESPONSE, SAVE_SOCKET,
+    SAVE_SOCKET,
     START_GAME
 } from "./session.actions";
 
@@ -72,18 +70,6 @@ const session = (state = initialState, action) => {
                     success: false,
                     error: true
                 }
-            };
-        case REGISTER_TO_PLAY_REQUEST:
-        case REGISTER_TO_PLAY_RESPONSE:
-        case REGISTER_TO_PLAY_ERROR:
-            return {
-                ...state,
-                registerToPlayStatus: {
-                    success : action.type === REGISTER_TO_PLAY_RESPONSE,
-                    error   : action.type === REGISTER_TO_PLAY_ERROR && action.error,
-                    loading : action.type === REGISTER_TO_PLAY_REQUEST
-                },
-                game: {id : action.type === REGISTER_TO_PLAY_RESPONSE && action.response.data.game_session_id},
             };
         case START_GAME:
             return {

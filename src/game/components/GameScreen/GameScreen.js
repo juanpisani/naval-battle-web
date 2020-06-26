@@ -22,12 +22,14 @@ export class GameScreen extends Component {
 
     render() {
         return (
-            <div>
-                <div className="h-container__col">
-                    <Battlefield cells={this.props.ownCells}/>
-                </div>
-                <div className="h-container__col">
-                    <Battlefield cells={this.props.opponentCells}/>
+            <div className="page v-container">
+                <div className="h-container">
+                    <div className="h-container__col">
+                        <Battlefield cells={this.props.ownCells}/>
+                    </div>
+                    <div className="h-container__col">
+                        <Battlefield cells={this.props.opponentCells}/>
+                    </div>
                 </div>
             </div>
         );

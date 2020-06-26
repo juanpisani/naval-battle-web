@@ -2,7 +2,6 @@ import {GAME_STARTED, UPDATE_DISPOSITION_SUCCESS} from "./game.actions";
 
 const initialState = {
     ownCells: {},
-    ownShips: {},
     opponentCells: {},
 };
 
@@ -14,7 +13,6 @@ const game = (state = initialState, action) => {
             return {
                 ...state,
                 ownCells: action.ownCells,
-                ownShips: action.ownShips,
                 opponentCells: action.opponentCells,
             };
         default:

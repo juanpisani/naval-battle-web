@@ -5,7 +5,6 @@ const mapStateToProps = (state, ownProps) => ({
     isLoggedIn        :   state.session.isLoggedIn,
     userId            :   state.session.user.id,
     ownCells          :   state.game.ownCells,
-    ownShips          :   state.game.ownShips,
     opponentCells     :   state.game.opponentCells,
     socket            :   state.session.socket,
 });

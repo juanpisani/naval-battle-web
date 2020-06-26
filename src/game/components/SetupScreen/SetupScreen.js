@@ -18,24 +18,21 @@ export class SetupScreen extends Component {
     componentWillMount() {
         !this.props.isLoggedIn && this.props.history.push("/");
         const history = this.props.history;
-        const gameStarted = this.props.gameStarted;
-        const ownCells = this.state.cells;
-        const ownShips = this.state.ships;
-        const opponentCells = Cell.generate();
         this.props.socket.on('users_boards_received', function (msg) {
             console.log('users_boards_received', msg);
         });
         this.props.socket.on('boards_ready', function (msg) {
             console.log('boards_ready', msg);
-            gameStarted(ownCells, ownShips, opponentCells);
             history.push("/game")
         });
     }
 
+
     sendBoard(gameId, ships, userId) {
         const board = this.getPositionJson(ships);
         this.props.socket.emit('setup_board', {user_id: userId, game_id: gameId, board: board});
-        console.log("BOARD SENT")
+        console.log("BOARD SENT");
+        this.props.gameStarted(this.state.cells, Cell.generate());
     }
 
     getPositionJson(ships) {
@@ -66,7 +63,7 @@ export class SetupScreen extends Component {
         const {cells, ships} = this.state;
         Cell.resetCells(cells);
         Cell.updateCells(cells, ships);
-        this.setState({cells});
+        this.setState({...this.state, cells: cells});
     }
 
     handleMouseDown = (shipId) => {
