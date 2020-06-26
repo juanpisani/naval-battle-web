@@ -108,15 +108,6 @@ class Ship extends Position {
         return result;
     }
 
-    simplify() {
-        return {
-            id: this.id,
-            orientation: this.orientation,
-            x: this.position.x,
-            y: this.position.y
-        };
-    }
-
     static generate() {
         return [
             new Ship({ id: 0, x: 0, y: 0, length: ClassOfShip.Submarine }),

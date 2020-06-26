@@ -1,4 +1,4 @@
-import {GOOGLE_LOGIN_ERROR, GOOGLE_LOGIN_RESPONSE, REGISTER_TO_PLAY_REQUEST,} from "./session.actions";
+import {GOOGLE_LOGIN_ERROR, GOOGLE_LOGIN_RESPONSE,} from "./session.actions";
 import actions from "../index";
 import {services} from "./session.services";
 
@@ -27,7 +27,7 @@ const sessionMiddleware = ({ dispatch, getState }) => next => {
                 //     .catch(error => {
                 //         dispatch(actions.session.registerToPlayError(error));
                 //     });
-                break;
+                // break;
             default:
                 // break;
         }

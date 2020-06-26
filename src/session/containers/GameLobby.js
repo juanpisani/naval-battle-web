@@ -4,14 +4,14 @@ import GameLobbyScreen from "../components/GameLobbyScreen/GameLobbyScreen";
 import {sessionActions} from "../session.actions";
 
 const mapStateToProps = (state, ownProps) => ({
-    user            :   state.session.user,
-    gameId          :   state.session.game.id,
-    isLoggedIn      :   state.session.isLoggedIn,
-    registerToPlayStatus : state.session.registerToPlayStatus,
-    opponentReady   : state.session.game.opponentReady,
-    playerOne       : state.session.game.playerOne,
-    playerTwo       : state.session.game.playerTwo,
-    socket          : state.session.socket,
+    user                 :   state.session.user,
+    gameId               :   state.session.game.id,
+    isLoggedIn           :   state.session.isLoggedIn,
+    registerToPlayStatus :   state.session.registerToPlayStatus,
+    opponentReady        :   state.session.game.opponentReady,
+    playerOne            :   state.session.game.playerOne,
+    playerTwo            :   state.session.game.playerTwo,
+    socket               :   state.session.socket,
 });
 
 const mapDispatchToProps = dispatch => ({

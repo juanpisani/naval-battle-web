@@ -30,36 +30,32 @@ export default class GameLobbyScreen extends Component {
     render() {
         return (
             <div>
-                <div>
-                    <div>
-                        <Card>
-                            <Card.Body>
-                                <Card.Title>
-                                    <p style={{color:"blue"}}>Battleship</p>
-                                </Card.Title>
-                                    {this.props.opponentReady ?
-                                        <div>
-                                            <Card.Title>GAME {this.props.roomId}
-                                            </Card.Title>
-                                            <div style={{display: "flex", justifyContent: "space-between", flexDirection: "row"}}>
-                                                <PlayerCard player={this.props.playerOne} />
-                                                <PlayerCard player={this.props.playerTwo} />
-                                                <Button onClick={() => this.readyToPlay(this.props.user.id, this.props.gameId)}>
-                                                    Empezar!</Button>
-                                            </div>
-                                        </div>
-                                        :
-                                        <div>
-                                            <Card.Title>Waiting for an opponent</Card.Title>
-                                            <img style={{width:"20%", height:"20%", marginTop:"8%", marginBottom:"10%"}}
-                                                 src={require('../../../assets/waiting.gif')} alt="waiting..." />
-                                        </div>
-                                    }
-                            </Card.Body>
-                        </Card>
-                    </div>
-                    {/*todo poner timer y hacer redirect a /game */}
-                </div>
+                <Card>
+                    <Card.Body>
+                        <Card.Title>
+                            <p style={{color:"blue"}}>Battleship</p>
+                        </Card.Title>
+                            {this.props.opponentReady ?
+                                <div>
+                                    <Card.Title>GAME {this.props.roomId}
+                                    </Card.Title>
+                                    <div style={{display: "flex", justifyContent: "space-between", flexDirection: "row"}}>
+                                        <PlayerCard player={this.props.playerOne} />
+                                        <PlayerCard player={this.props.playerTwo} />
+                                        <Button onClick={() => this.readyToPlay(this.props.user.id, this.props.gameId)}>
+                                            Empezar!
+                                        </Button>
+                                    </div>
+                                </div>
+                                :
+                                <div>
+                                    <Card.Title>Waiting for an opponent</Card.Title>
+                                    <img style={{width:"20%", height:"20%", marginTop:"8%", marginBottom:"10%"}}
+                                         src={require('../../../assets/waiting.gif')} alt="waiting..." />
+                                </div>
+                            }
+                    </Card.Body>
+                </Card>
             </div>
         );
     }
