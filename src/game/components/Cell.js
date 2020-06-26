@@ -11,6 +11,7 @@ const Cell = ({
                   isInactive,
                   isOpen
               }) => {
+
     let cellClass = "cell";
 
     if (className) {

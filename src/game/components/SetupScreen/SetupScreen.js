@@ -27,11 +27,9 @@ export class SetupScreen extends Component {
         });
     }
 
-
     sendBoard(gameId, ships, userId) {
         const board = this.getPositionJson(ships);
         this.props.socket.emit('setup_board', {user_id: userId, game_id: gameId, board: board});
-        console.log("BOARD SENT");
         this.props.gameStarted(this.state.cells, Cell.generate());
     }
 
