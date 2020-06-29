@@ -20,13 +20,13 @@ class Ship extends Position {
     }
 
     getExtreme1(){
-        return String.fromCharCode(this.y + 64) + this.x;
+        return  "" + this.y + this.x;
     }
 
     getExtreme2(){
         return this.orientation === Orientation.Horizontal ?
-            String.fromCharCode(this.y + 64) + (this.x + this.length - 1 ) :
-            String.fromCharCode(this.y + this.length - 1 + 64) + (this.x)
+            "" + this.y + (this.x + this.length - 1 ) :
+            "" + (this.y + this.length - 1) + this.x;
     }
 
     rotate() {
@@ -34,14 +34,6 @@ class Ship extends Position {
             this.orientation === Orientation.Horizontal
                 ? Orientation.Vertical
                 : Orientation.Horizontal;
-    }
-
-    addDamage() {
-        this.life -= 1;
-    }
-
-    isDestroyed() {
-        return this.life === 0;
     }
 
     positions() {
@@ -68,7 +60,6 @@ class Ship extends Position {
 
     borders() {
         const result = [];
-
         if (!this.isOnBoard()) return result;
 
         if (this.orientation === Orientation.Horizontal) {
@@ -104,22 +95,21 @@ class Ship extends Position {
                 new Position(this.position.x - 1, this.position.y + this.length)
             );
         }
-
         return result;
     }
 
     static generate() {
         return [
-            new Ship({ id: 0, x: 0, y: 0, length: ClassOfShip.Submarine }),
-            new Ship({ id: 1, x: 0, y: 0, length: ClassOfShip.Submarine }),
-            new Ship({ id: 2, x: 0, y: 0, length: ClassOfShip.Submarine }),
-            new Ship({ id: 3, x: 0, y: 0, length: ClassOfShip.Submarine }),
-            new Ship({ id: 4, x: 0, y: 0, length: ClassOfShip.Destroyer }),
-            new Ship({ id: 5, x: 0, y: 0, length: ClassOfShip.Destroyer }),
-            new Ship({ id: 6, x: 0, y: 0, length: ClassOfShip.Destroyer }),
-            new Ship({ id: 7, x: 0, y: 0, length: ClassOfShip.Cruiser }),
-            new Ship({ id: 8, x: 0, y: 0, length: ClassOfShip.Cruiser }),
-            new Ship({ id: 9, x: 0, y: 0, length: ClassOfShip.Battleship })
+            new Ship({ id: 0, x: -1, y: -1, length: ClassOfShip.Submarine }),
+            new Ship({ id: 1, x: -1, y: -1, length: ClassOfShip.Submarine }),
+            new Ship({ id: 2, x: -1, y: -1, length: ClassOfShip.Submarine }),
+            new Ship({ id: 3, x: -1, y: -1, length: ClassOfShip.Submarine }),
+            new Ship({ id: 4, x: -1, y: -1, length: ClassOfShip.Destroyer }),
+            new Ship({ id: 5, x: -1, y: -1, length: ClassOfShip.Destroyer }),
+            new Ship({ id: 6, x: -1, y: -1, length: ClassOfShip.Destroyer }),
+            new Ship({ id: 7, x: -1, y: -1, length: ClassOfShip.Cruiser }),
+            new Ship({ id: 8, x: -1, y: -1, length: ClassOfShip.Cruiser }),
+            new Ship({ id: 9, x: -1, y: -1, length: ClassOfShip.Battleship })
         ];
     }
 
@@ -127,7 +117,6 @@ class Ship extends Position {
         const freeCells = Array.from(cells.values()).filter(
             (i) => !i.isFilled() && !i.isInactive()
         );
-
         const t = true;
         while (t) {
             const index = Math.floor(Math.random() * freeCells.length);
@@ -135,6 +124,7 @@ class Ship extends Position {
             ship.move(freeCells[index].position.x, freeCells[index].position.y);
 
             if (Ship.isPositionValid(ship, cells)) {
+                debugger
                 break;
             } else {
                 ship.rotate();
@@ -148,7 +138,6 @@ class Ship extends Position {
         for (let i = 0; i < shipCells.length; ++i) {
             const position = shipCells[i];
             const cell = cells.get(`${position.x}:${position.y}`);
-
             if (!cell || cell.isFilled() || cell.isInactive()) {
                 return false;
             }

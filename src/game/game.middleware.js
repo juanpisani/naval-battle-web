@@ -1,3 +1,4 @@
+
 const gameMiddleware = ({ dispatch, getState }) => next => {
     return action => {
         next(action);

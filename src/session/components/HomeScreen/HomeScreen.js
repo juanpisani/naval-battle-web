@@ -22,7 +22,6 @@ class HomeScreen extends Component {
             socket.emit('connect_player', {user_id: user_id});
         });
         socket.on('connected_player', function(msg){
-            console.log('connected_player', msg);
             history.push("/gameLobby");
         });
         // socket.on('ready_to_start', function(msg){

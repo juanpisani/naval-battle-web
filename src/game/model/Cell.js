@@ -42,8 +42,8 @@ class Cell extends Position{
     static generate = () => {
         const result = new Map();
 
-        for (let y = 1; y < 10 + 1; ++y) {
-            for (let x = 1; x < 10 + 1; ++x) {
+        for (let y = 0; y < 10; ++y) {
+            for (let x = 0; x < 10; ++x) {
                 result.set(`${x}:${y}`, new Cell(x, y));
             }
         }
@@ -67,10 +67,8 @@ class Cell extends Position{
                     cell.shipId = ships[i].id;
                 }
             }
-
             for (const position of ships[i].borders()) {
                 const cell = cells.get(position.key);
-
                 if (cell) {
                     cell.state = CellStates.Inactive;
                 }

@@ -21,6 +21,9 @@ const mapDispatchToProps = dispatch => ({
     },
     processingShot: (processingShot) => {
         dispatch(gameActions.processingShot(processingShot));
+    },
+    updateCells: (ownCells, opponentCells) => {
+        dispatch(gameActions.updateCells(ownCells, opponentCells));
     }
 });
 

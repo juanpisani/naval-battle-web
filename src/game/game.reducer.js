@@ -1,4 +1,4 @@
-import {CHANGE_TURN, GAME_STARTED, PROCESSING_SHOT, UPDATE_DISPOSITION_SUCCESS} from "./game.actions";
+import {CHANGE_TURN, GAME_STARTED, PROCESSING_SHOT, UPDATE_CELLS, UPDATE_DISPOSITION_SUCCESS} from "./game.actions";
 
 const initialState = {
     ownCells: {},
@@ -14,6 +14,7 @@ const game = (state = initialState, action) => {
         case UPDATE_DISPOSITION_SUCCESS:
             return action.positions;
         case GAME_STARTED:
+        case UPDATE_CELLS:
             return {
                 ...state,
                 ownCells: action.ownCells,
