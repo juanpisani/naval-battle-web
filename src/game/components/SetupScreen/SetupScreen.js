@@ -16,7 +16,6 @@ export class SetupScreen extends Component {
     };
 
     componentWillMount() {
-        !this.props.isLoggedIn && this.props.history.push("/");
         this.props.socket.on('users_boards_received', msg => {
             console.log('users_boards_received', msg);
         });

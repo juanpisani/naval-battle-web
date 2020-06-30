@@ -5,10 +5,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 class ResultScreen extends Component {
 
-    componentWillMount() {
-        !this.props.isLoggedIn && this.props.history.push("/");
-    }
-
     render() {
         let {user} = this.props;
         return (<div>
@@ -26,7 +22,7 @@ class ResultScreen extends Component {
                                     :
                                     <h1 style={{color: "black"}}>Better luck next time {user.name?.toUpperCase()}, you lost</h1>
                                 }
-                                <Button variant="light" size="lg" onClick={() => this.props.history.push("/home")}>
+                                <Button variant="light" size="lg" onClick={() => {this.props.deleteGameRoomAndSocket(); this.props.history.push("/home");}}>
                                     <h3 style={{color:"lightskyblue"}}>Back to home</h3>
                                 </Button>
                             </div>

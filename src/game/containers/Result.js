@@ -1,6 +1,7 @@
 import {connect} from "react-redux";
 import ResultScreen from "../components/ResultScreen/ResultScreen";
 import withRouter from "react-router-dom/es/withRouter";
+import {sessionActions} from "../../session/session.actions";
 
 const mapStateToProps = (state, ownProps) => ({
     user              :   state.session.user,
@@ -10,6 +11,9 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+    deleteGameRoomAndSocket: () => {
+    dispatch(sessionActions.deleteGameRoomAndSocket());
+}
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ResultScreen));

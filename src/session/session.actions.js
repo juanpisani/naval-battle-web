@@ -8,6 +8,8 @@ export const START_GAME = "START_GAME";
 export const SAVE_SOCKET = "SAVE_SOCKET";
 
 export const LOGOUT = "LOGOUT";
+export const DELETE_GAME_ROOM_AND_SOCKET = "DELETE_GAME_ROOM_AND_SOCKET";
+
 
 export const sessionActions = {
 
@@ -22,4 +24,5 @@ export const sessionActions = {
     saveSocketInReducer: (socket) => ({type: SAVE_SOCKET, socket: socket}),
 
     logout: () => ({type: LOGOUT}),
+    deleteGameRoomAndSocket: () => ({type: DELETE_GAME_ROOM_AND_SOCKET})
 };

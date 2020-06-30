@@ -7,10 +7,6 @@ import io from 'socket.io-client';
 
 class HomeScreen extends Component {
 
-    componentWillMount() {
-        !this.props.isLoggedIn && this.props.history.push("/");
-    }
-
     async handleClick() {
         const user_id = this.props.user.id;
         const socket = io(config.API_PATH);
@@ -36,7 +32,7 @@ class HomeScreen extends Component {
                             </Card.Title>
                             <Card.Title>Home</Card.Title>
                             <div>
-                                <h1 style={{color:"white"}}>WELCOME {user.name?.toUpperCase()}</h1>
+                                <h1 style={{color:"black"}}>WELCOME {user.name?.toUpperCase()}</h1>
                                 <Button variant="light" size="lg" onClick={() => this.handleClick()}>
                                     <h3 style={{color:"lightskyblue"}}>PLAY</h3>
                                 </Button>

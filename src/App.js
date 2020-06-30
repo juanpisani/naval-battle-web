@@ -1,24 +1,25 @@
 import React from 'react';
 import Login from "./session/containers/Login";
-import { BrowserRouter as Router, Switch, Route, } from 'react-router-dom';
+import {PrivateRoute} from "./PrivateRoute";
 import Home from "./session/containers/Home";
 import GameLobby from "./session/containers/GameLobby";
 import Setup from "./game/containers/Setup";
 import Game from "./game/containers/Game";
 import Result from "./game/containers/Result";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 function App() {
-  return (
+    return (
       <>
         <div className="App">
             <Router>
                 <Switch>
                     <Route exact path='/' component={Login}/>
-                    <Route exact path='/home' component={Home}/>
-                    <Route exact path='/gameLobby' component={GameLobby}/>
-                    <Route exact path='/setPieces' component={Setup}/>
-                    <Route exact path='/game' component={Game}/>
-                    <Route exact path='/results' component={Result}/>
+                    <PrivateRoute exact path='/home' component={Home}/>
+                    <PrivateRoute exact path='/gameLobby' component={GameLobby}/>
+                    <PrivateRoute exact path='/setPieces' component={Setup}/>
+                    <PrivateRoute exact path='/game' component={Game}/>
+                    <PrivateRoute exact path='/results' component={Result}/>
                 </Switch>
             </Router>
         </div>

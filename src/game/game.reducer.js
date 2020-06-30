@@ -4,7 +4,7 @@ import {
     IS_WINNER,
     PROCESSING_SHOT,
     UPDATE_CELLS,
-    UPDATE_DISPOSITION_SUCCESS
+    UPDATE_DISPOSITION_SUCCESS,
 } from "./game.actions";
 
 const initialState = {

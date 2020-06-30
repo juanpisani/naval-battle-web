@@ -6,10 +6,6 @@ import {CellStates} from "../../consts/CellStates";
 
 export class GameScreen extends Component {
 
-    componentWillMount() {
-        !this.props.isLoggedIn && this.props.history.push("/");
-    }
-
     componentDidMount() {
         this.props.socket.on('shot_processed', msg => {
             this.props.processingShot(false);

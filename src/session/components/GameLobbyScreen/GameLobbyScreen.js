@@ -7,7 +7,6 @@ export default class GameLobbyScreen extends Component {
     //TODO TENER EL ID DE LA SESSION EN LA URL PARA PODER JUGAR VARIOS JUEGOS Y REFRESHEAR
 
     componentWillMount() {
-        !this.props.isLoggedIn && this.props.history.push("/");
         this.props.socket.on('ready_to_start', msg => {
             this.props.startGame(msg.player_1, msg.player_2, msg.game);
         });

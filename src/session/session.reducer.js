@@ -2,7 +2,8 @@ import {
     BACKEND_LOGIN_ERROR,
     BACKEND_LOGIN_RESPONSE, LOGOUT,
     SAVE_SOCKET,
-    START_GAME
+    START_GAME,
+    DELETE_GAME_ROOM_AND_SOCKET
 } from "./session.actions";
 
 const initialState = {
@@ -90,6 +91,23 @@ const session = (state = initialState, action) => {
                     error: false,
                     loading: false,
                 },
+                game: {
+                    id: "",
+                    opponentReady: false,
+                    playerOne: {
+                        id: "",
+                        email: "",
+                    },
+                    playerTwo: {
+                        id: "",
+                        email: "",
+                    }
+                }
+            };
+        case DELETE_GAME_ROOM_AND_SOCKET:
+            return {
+                ...state,
+                socket: {},
                 game: {
                     id: "",
                     opponentReady: false,
