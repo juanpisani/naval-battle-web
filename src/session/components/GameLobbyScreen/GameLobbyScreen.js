@@ -14,7 +14,7 @@ export default class GameLobbyScreen extends Component {
         this.props.socket.on('room_update', msg => {
             console.log('room_update', msg);
         });
-        this.props.socket.on('ready_for_setup', function(msg){
+        this.props.socket.on('ready_for_setup', msg => {
             this.props.history.push("/setPieces")
         });
         this.props.socket.on('game_ended', msg => {
