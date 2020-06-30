@@ -8,19 +8,22 @@ export class GameScreen extends Component {
 
     componentWillMount() {
         !this.props.isLoggedIn && this.props.history.push("/");
+    }
+
+    componentDidMount() {
         this.props.socket.on('shot_processed', msg => {
             this.props.processingShot(false);
             const [ownCells, opponentCells] = this.analyzeShot(msg.user_shot, msg.x, msg.y, msg.hit, msg.sunken,
-                                                               this.props.userId, this.props.ownCells,
-                                                               this.props.opponentCells);
+                this.props.userId, this.props.ownCells,
+                this.props.opponentCells);
             this.props.updateCells(ownCells, opponentCells);
         });
         this.props.socket.on('player_turn', msg => {
             this.props.changeTurn(msg.user_id === this.props.userId);
         });
         this.props.socket.on('game_ended', msg => {
-            console.log('game_ended', msg);
-            alert(msg.winner.user_id === this.props.userId ? "You win" : "You lose");
+            this.props.isWinner(msg.winner.user_id === this.props.userId);
+            this.props.history.push("/results");
         });
         window.addEventListener("beforeunload", ev => {
             this.props.socket.emit("left_room", {game_id: this.props.gameId, user_id: this.props.userId});
@@ -33,6 +36,10 @@ export class GameScreen extends Component {
 
     fire(gameId, userId, x, y) {
         this.props.socket.emit('fire', {game_id: gameId, user_id: userId, x: x, y: y});
+    }
+
+    randomShot() {
+        this.props.socket.emit('random_shot', {game_id: this.props.gameId, user_id: this.props.userId});
     }
 
     saveChange = (board, changedCell) => {
@@ -117,7 +124,6 @@ export class GameScreen extends Component {
     };
 
     onCellClick(x, y) {
-        //todo check si el juego sigue o si ya termino
         if (this.props.isMyTurn && !this.props.isProcessingShot) {
             let opponentBoard = this.props.opponentCells;
             let selectedCell = this.getCell(opponentBoard, x, y);
@@ -144,6 +150,7 @@ export class GameScreen extends Component {
                         <Battlefield cells={this.props.opponentCells} onCellClick={this.onCellClick.bind(this)}/>
                     </div>
                 </div>
+                <button onClick={() => this.randomShot()}>Random shot</button>
             </div>
         );
     }

@@ -7,7 +7,7 @@ class LoginScreen extends Component {
 
     successLogin = (response) => {
         this.props.successLogin(response);
-        this.props.loginStatus.success && this.props.history.push('/Home')
+        this.props.loginStatus.success && this.props.history.push('/home')
     };
 
     errorLogin = () => {
@@ -15,7 +15,7 @@ class LoginScreen extends Component {
     };
 
     componentWillUpdate(nextProps, nextState, nextContext) {
-        nextProps.user && this.props.history.push('/Home')
+        nextProps.user && this.props.history.push('/home')
     }
 
     render() {

@@ -17,15 +17,15 @@ export class SetupScreen extends Component {
 
     componentWillMount() {
         !this.props.isLoggedIn && this.props.history.push("/");
-        this.props.socket.on('users_boards_received', function (msg) {
+        this.props.socket.on('users_boards_received', msg => {
             console.log('users_boards_received', msg);
         });
         this.props.socket.on('boards_ready', msg => {
             this.props.history.push("/game")
         });
         this.props.socket.on('game_ended', msg => {
-            console.log('game_ended', msg);
-            alert(msg.winner.user_id === this.props.userId ? "You win" : "You lose");
+            this.props.isWinner(msg.winner.user_id === this.props.userId);
+            this.props.history.push("/results");
         });
         window.addEventListener("beforeunload", ev => {
             this.props.socket.emit("left_room", {game_id: this.props.gameId, user_id: this.props.userId});
@@ -125,7 +125,6 @@ export class SetupScreen extends Component {
         const {ships, cells, currentShip} = this.state;
 
         return (
-
             <div>
                 <Card>
                     <Card.Body>

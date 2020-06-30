@@ -2,6 +2,7 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import GameLobbyScreen from "../components/GameLobbyScreen/GameLobbyScreen";
 import {sessionActions} from "../session.actions";
+import {gameActions} from "../../game/game.actions";
 
 const mapStateToProps = (state, ownProps) => ({
     user                 :   state.session.user,
@@ -18,6 +19,9 @@ const mapDispatchToProps = dispatch => ({
     startGame:(playerOne, playerTwo, gameId) => {
         dispatch(sessionActions.startGame(playerOne, playerTwo, gameId));
     },
+    isWinner: (result) => {
+        dispatch(gameActions.isWinner(result));
+    }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(GameLobbyScreen));

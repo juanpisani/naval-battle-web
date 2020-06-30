@@ -1,4 +1,11 @@
-import {CHANGE_TURN, GAME_STARTED, PROCESSING_SHOT, UPDATE_CELLS, UPDATE_DISPOSITION_SUCCESS} from "./game.actions";
+import {
+    CHANGE_TURN,
+    GAME_STARTED,
+    IS_WINNER,
+    PROCESSING_SHOT,
+    UPDATE_CELLS,
+    UPDATE_DISPOSITION_SUCCESS
+} from "./game.actions";
 
 const initialState = {
     ownCells: {},
@@ -7,6 +14,7 @@ const initialState = {
     x: 0,
     y: 0,
     isProcessingShot: false,
+    isWinner: false,
 };
 
 const game = (state = initialState, action) => {
@@ -29,6 +37,11 @@ const game = (state = initialState, action) => {
             return {
                 ...state,
                 isProcessingShot: action.processingShot
+            };
+        case IS_WINNER:
+            return {
+                ...state,
+                isWinner: action.result
             };
         default:
             return state;

@@ -5,6 +5,7 @@ import Home from "./session/containers/Home";
 import GameLobby from "./session/containers/GameLobby";
 import Setup from "./game/containers/Setup";
 import Game from "./game/containers/Game";
+import Result from "./game/containers/Result";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
                     <Route exact path='/gameLobby' component={GameLobby}/>
                     <Route exact path='/setPieces' component={Setup}/>
                     <Route exact path='/game' component={Game}/>
+                    <Route exact path='/results' component={Result}/>
                 </Switch>
             </Router>
         </div>

@@ -1,6 +1,7 @@
 import {connect} from "react-redux";
 import {GameScreen} from "../components/GameScreen/GameScreen";
 import {gameActions} from "../game.actions";
+import withRouter from "react-router-dom/es/withRouter";
 
 const mapStateToProps = (state, ownProps) => ({
     isLoggedIn        :   state.session.isLoggedIn,
@@ -24,7 +25,10 @@ const mapDispatchToProps = dispatch => ({
     },
     updateCells: (ownCells, opponentCells) => {
         dispatch(gameActions.updateCells(ownCells, opponentCells));
+    },
+    isWinner: (result) => {
+        dispatch(gameActions.isWinner(result));
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(GameScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(GameScreen));
