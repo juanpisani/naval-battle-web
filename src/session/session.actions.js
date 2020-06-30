@@ -10,6 +10,10 @@ export const SAVE_SOCKET = "SAVE_SOCKET";
 export const LOGOUT = "LOGOUT";
 export const DELETE_GAME_ROOM_AND_SOCKET = "DELETE_GAME_ROOM_AND_SOCKET";
 
+export const GET_MY_STATS_REQUEST = "GET_MY_STATS_REQUEST";
+export const GET_MY_STATS_RESPONSE = "GET_MY_STATS_RESPONSE";
+
+
 
 export const sessionActions = {
 
@@ -20,9 +24,12 @@ export const sessionActions = {
     backEndResponse: (response) => ({type: BACKEND_LOGIN_RESPONSE, response: response}),
 
     startGame: (playerOne, playerTwo, gameId) => ({type: START_GAME, playerOne: playerOne,
-        playerTwo: playerTwo, gameId: gameId}),
+                                                   playerTwo: playerTwo, gameId: gameId}),
     saveSocketInReducer: (socket) => ({type: SAVE_SOCKET, socket: socket}),
 
     logout: () => ({type: LOGOUT}),
-    deleteGameRoomAndSocket: () => ({type: DELETE_GAME_ROOM_AND_SOCKET})
+    deleteGameRoomAndSocket: () => ({type: DELETE_GAME_ROOM_AND_SOCKET}),
+
+    getMyStatsRequest: () => ({type: GET_MY_STATS_REQUEST}),
+    getMyStatsResponse: (response) => ({type: GET_MY_STATS_RESPONSE, response: response}),
 };

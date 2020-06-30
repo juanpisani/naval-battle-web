@@ -3,15 +3,20 @@ import {Button, Card} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.css';
 import config from "../../../config";
 import io from 'socket.io-client';
+import {PieChart} from 'react-minimal-pie-chart';
 
 
 class HomeScreen extends Component {
+
+    componentWillMount() {
+        this.props.getMyStatsRequest();
+    }
 
     async handleClick() {
         const user_id = this.props.user.id;
         const socket = io(config.API_PATH);
         const saveSocketInReducer = this.props.saveSocketInReducer;
-        socket.on('connect', function() {
+        socket.on('connect', function () {
             saveSocketInReducer(this);
             socket.emit('connect_player', {user_id: user_id});
         });
@@ -28,20 +33,39 @@ class HomeScreen extends Component {
                     <Card>
                         <Card.Body>
                             <Card.Title>
-                                <p style={{color:"blue"}}>Battleship</p>
+                                <p style={{color: "blue"}}>Battleship</p>
                             </Card.Title>
                             <Card.Title>Home</Card.Title>
                             <div>
-                                <h1 style={{color:"black"}}>WELCOME {user.name?.toUpperCase()}</h1>
+                                <h1 style={{color: "black"}}>WELCOME {user.name?.toUpperCase()}</h1>
                                 <Button variant="light" size="lg" onClick={() => this.handleClick()}>
-                                    <h3 style={{color:"lightskyblue"}}>PLAY</h3>
+                                    <h3 style={{color: "lightskyblue"}}>PLAY</h3>
                                 </Button>
                             </div>
                         </Card.Body>
                     </Card>
                 </div>
-                <Button variant="light" size="lg" onClick={() => {this.props.logout(); this.props.history.push("/");}}>
-                    <h3 style={{color:"lightskyblue"}}>Logout</h3>
+                {this.props.stats.wins > 0 || this.props.stats.loses > 0 ?
+                    <div style={{width: "40%", height: "40%"}}>
+                        <PieChart
+                            data={[
+                                {value: this.props.stats.wins, color: '#00FF00', label: "Wins",},
+                                {value: this.props.stats.loses, color: '#FF0000', label: "Loses"},
+                            ]}
+                            totalValue={this.props.stats.wins + this.props.stats.loses}
+                            label={({dataEntry}) => dataEntry.value > 0 ? dataEntry.label + ": " + dataEntry.value : ""}
+                            // labelStyle={{
+                            //     ...defaultLabelStyle,
+                            // }}
+                        />
+                    </div>
+                    :
+                    null}
+                <Button variant="light" size="lg" onClick={() => {
+                    this.props.logout();
+                    this.props.history.push("/");
+                }}>
+                    <h3 style={{color: "lightskyblue"}}>Logout</h3>
                 </Button>
             </div>
         </div>);

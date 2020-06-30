@@ -1,4 +1,4 @@
-import {GOOGLE_LOGIN_ERROR, GOOGLE_LOGIN_RESPONSE,} from "./session.actions";
+import {GET_MY_STATS_REQUEST, GOOGLE_LOGIN_ERROR, GOOGLE_LOGIN_RESPONSE,} from "./session.actions";
 import actions from "../index";
 import {services} from "./session.services";
 
@@ -11,6 +11,7 @@ const sessionMiddleware = ({ dispatch, getState }) => next => {
                 services.backEndLogin(action.response.tokenId)
                     .then((res) => {
                         dispatch(actions.session.backEndResponse(res));
+                        dispatch(actions.session.getMyHistoryRequest());
                     })
                     .catch(error => {
                         dispatch(actions.session.backEndLoginError(error));
@@ -19,17 +20,18 @@ const sessionMiddleware = ({ dispatch, getState }) => next => {
             case GOOGLE_LOGIN_ERROR:
                 console.log(action);
                 break;
-            // case REGISTER_TO_PLAY_REQUEST:
-                // services.registerToPlay(action.token)
-                //     .then((response) => {
-                //         dispatch(actions.session.registerToPlayResponse(response));
-                //     })
-                //     .catch(error => {
-                //         dispatch(actions.session.registerToPlayError(error));
-                //     });
-                // break;
+            case GET_MY_STATS_REQUEST:
+                debugger;
+                services.getMyStats(getState().session.user.id)
+                    .then((res) => {
+                        dispatch(actions.session.getMyStatsResponse(res));
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
+                break;
             default:
-                // break;
+                break;
         }
     };
 };

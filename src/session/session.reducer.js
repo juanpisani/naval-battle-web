@@ -3,13 +3,18 @@ import {
     BACKEND_LOGIN_RESPONSE, LOGOUT,
     SAVE_SOCKET,
     START_GAME,
-    DELETE_GAME_ROOM_AND_SOCKET
+    DELETE_GAME_ROOM_AND_SOCKET,
+    GET_MY_STATS_RESPONSE,
 } from "./session.actions";
 
 const initialState = {
     token: undefined,
     user: {},
     socket: {},
+    stats: {
+        wins: 0,
+        loses: 0,
+    },
     isLoggedIn: false,
     loginStatus: {
         success: false,
@@ -81,6 +86,10 @@ const session = (state = initialState, action) => {
                 token: undefined,
                 user: {},
                 socket: {},
+                stats: {
+                    wins: 0,
+                    loses: 0,
+                },
                 isLoggedIn: false,
                 loginStatus: {
                     success: false,
@@ -120,6 +129,15 @@ const session = (state = initialState, action) => {
                         email: "",
                     }
                 }
+            };
+        case GET_MY_STATS_RESPONSE:
+            debugger;
+            return {
+                ...state,
+                stats: {
+                    wins: parseInt(action.response.data.wins),
+                    loses: parseInt(action.response.data.loses)
+                },
             };
         default:
             return state
