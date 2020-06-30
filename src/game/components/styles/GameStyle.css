@@ -164,7 +164,7 @@ button {
 
 .cell--open {
     background: url('data:image/svg+xml;charset=utf8,<svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"><g><line x1="10" y1="0" x2="0" y2="10" stroke="silver" stroke-width="1" /><line x1="0" y1="0" x2="10" y2="10" stroke="silver" stroke-width="1" /></g></svg>') center center / 15px 15px no-repeat;
-    background-color: blue;
+    background-color: lightskyblue;
 }
 
 .ship {

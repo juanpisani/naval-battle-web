@@ -124,7 +124,6 @@ class Ship extends Position {
             ship.move(freeCells[index].position.x, freeCells[index].position.y);
 
             if (Ship.isPositionValid(ship, cells)) {
-                debugger
                 break;
             } else {
                 ship.rotate();

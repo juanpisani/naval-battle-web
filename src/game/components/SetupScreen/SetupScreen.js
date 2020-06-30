@@ -28,7 +28,6 @@ export class SetupScreen extends Component {
 
     sendBoard(gameId, ships, userId) {
         const board = this.getPositionJson(ships);
-        console.log(board);
         this.props.socket.emit('setup_board', {user_id: userId, game_id: gameId, board: board});
         this.props.gameStarted(this.state.cells, Cell.generate());
     }
@@ -111,7 +110,6 @@ export class SetupScreen extends Component {
         let cells = Cell.generate();
         ships.forEach(ship => {
             Ship.setPositionRandomly(ship, cells);
-            debugger
             Cell.updateCells(cells, ships);
         });
         this.setState({...this.state, ships: ships, cells: cells})

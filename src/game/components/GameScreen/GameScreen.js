@@ -8,67 +8,121 @@ export class GameScreen extends Component {
 
     componentWillMount() {
         !this.props.isLoggedIn && this.props.history.push("/");
-        // const history = this.props.history;
-        const analyzeShot = this.analyzeShot;
-        const processingShot = this.props.processingShot;
-        const changeTurn = this.props.changeTurn;
-        const userId = this.props.userId;
-        const ownCells = this.props.ownCells;
-        const opponentCells = this.props.opponentCells;
-        const getCell = this.getCell;
-        const updateCells = this.props.updateCells;
-        this.props.socket.on('shot_processed', function(msg){
-            console.log('shot_processed', msg);
-            processingShot(false);
-            analyzeShot(msg.user_shot, msg.x, msg.y, msg.hit, msg.sunken, userId, ownCells,
-                opponentCells, getCell, updateCells)
+        this.props.socket.on('shot_processed', msg => {
+            this.props.processingShot(false);
+            const [ownCells, opponentCells] = this.analyzeShot(msg.user_shot, msg.x, msg.y, msg.hit, msg.sunken,
+                                                               this.props.userId, this.props.ownCells,
+                                                               this.props.opponentCells);
+            this.props.updateCells(ownCells, opponentCells);
         });
-        this.props.socket.on('game_ended', function(msg){
+        this.props.socket.on('game_ended', msg => {
             console.log('game_ended', msg);
+            alert(msg.user_id == this.props.userId ? "You win" : "You lose");
         });
-        this.props.socket.on('player_turn', function(msg){
-            changeTurn(msg.user_id === userId);
+        this.props.socket.on('player_turn', msg => {
+            this.props.changeTurn(msg.user_id === this.props.userId);
+        });
+        window.addEventListener("beforeunload", ev => {
+            this.props.socket.emit("left_room", {game_id: this.props.gameId, user_id: this.props.userId});
         });
     }
+
+    // componentWillUnmount() {
+    //     window.removeEventListener("beforeunload")
+    // }
 
     fire(gameId, userId, x, y) {
         this.props.socket.emit('fire', {game_id: gameId, user_id: userId, x: x, y: y});
     }
 
-    analyzeShot(shooterId, x, y, hit, sunken, userId, ownCells, opponentCells, getCell, updateCells) {
-        let board = userId === shooterId ? opponentCells : ownCells;
-        let selectedCell = getCell(board, x, y);
-        // if (sunken) todo inhabilitar los alrededores
-        debugger
-        if (hit) selectedCell.state = CellStates.Injured;
-        else selectedCell.state = CellStates.Open;
-        // selectedCell.state = CellStates.Destroyed;
-        updateCells(ownCells, opponentCells)
-    }
-
-    getCell(board, x, y) {
-        debugger
-        let selectedCell;
-        board.forEach(cell => {
-            if (cell.x === x && cell.y === y) {
-                selectedCell = cell;
+    saveChange = (board, changedCell) => {
+        const newBoard = new Map();
+        for (let entry of board) {
+            let cell = entry[1];
+            if (cell.x === changedCell.x && cell.y === changedCell.y) {
+                newBoard.set(entry[0], changedCell);
+            }else {
+                newBoard.set(entry[0], cell);
             }
-        });
-        return selectedCell;
-    }
-
-    static checkIfCellIsValid(selectedCell) {
-        debugger
-        if(selectedCell.isDamaged() || selectedCell.isOpen())
-            return -1;
         }
+        return newBoard;
+    };
+
+    getShip = (board, selectedCell) => {
+        let shipPositions = [selectedCell];
+        for (const position of selectedCell.getBorders()) {
+            const cell = this.getCell(board, position.x, position.y);
+            if (cell.state === CellStates.Injured) shipPositions.push(cell);
+        }
+        return this.getOtherShipParts(board, shipPositions);
+    };
+
+    getOtherShipParts = (board, alreadyShipsParts) => {
+        let newPositions = [];
+        for (const cell of alreadyShipsParts) {
+            for (const position of cell.getBorders()) {
+                const cell = this.getCell(board, position.x, position.y);
+                if (!alreadyShipsParts.includes(cell) && cell.state === CellStates.Injured)
+                    newPositions.push(cell);
+            }
+        }
+        if (newPositions.length === 0) return alreadyShipsParts;
+        return this.getOtherShipParts(board, alreadyShipsParts.concat(newPositions))
+    };
+
+    updateBorders = (board, shipPositions) => {
+        const newBoard = board;
+        for (const cell of shipPositions) {
+            for (const position of cell.getBorders()) {
+                const cell = this.getCell(board, position.x, position.y);
+                if (!shipPositions.includes(cell)) {
+                    cell.state = CellStates.Open;
+                    newBoard.set(`${position.x}:${position.y}`, cell);
+                }
+            }
+        }
+        return newBoard;
+    };
+
+
+    analyzeShot = (shooterId, x, y, hit, sunken, userId, ownCells, opponentCells) => {
+        const isMyShot = userId === shooterId;
+        let board = isMyShot ? opponentCells : ownCells;
+        let selectedCell = this.getCell(board, x, y);
+        selectedCell.state = hit ? CellStates.Injured : CellStates.Open;
+        if (isMyShot){
+            opponentCells = this.saveChange(opponentCells, selectedCell)
+        } else {
+            ownCells = this.saveChange(ownCells, selectedCell)
+        }
+        if (sunken) {
+            if(isMyShot){
+                const shipPositions = this.getShip(opponentCells, selectedCell);
+                opponentCells = this.updateBorders(opponentCells, shipPositions);
+            } else {
+                const shipPositions = this.getShip(ownCells, selectedCell);
+                ownCells = this.updateBorders(ownCells, shipPositions);
+            }
+        }
+        return [ownCells, opponentCells]
+
+    };
+
+    getCell = (board, x, y) => {
+        return board.get(`${x}:${y}`)
+    };
+
+    checkIfCellIsValid = (selectedCell) => {
+        if(selectedCell.isDamaged() || selectedCell.isOpen()) return -1;
+    };
 
     onCellClick(x, y) {
-        //todo check si ya estaba disparada esa y si el numero es valido breo y si el juego sigue o si ya termino
+        //todo check si el juego sigue o si ya termino
         if (this.props.isMyTurn && !this.props.isProcessingShot) {
             let opponentBoard = this.props.opponentCells;
             let selectedCell = this.getCell(opponentBoard, x, y);
-            if (GameScreen.checkIfCellIsValid(selectedCell) === -1) return;
+            if (selectedCell === undefined) return;
+            if (this.checkIfCellIsValid(selectedCell) === -1) return;
             this.props.processingShot(true);
             this.fire(this.props.gameId, this.props.userId, x, y);
         }

@@ -16,13 +16,12 @@ class HomeScreen extends Component {
         const user_id = this.props.user.id;
         const socket = io(config.API_PATH);
         const saveSocketInReducer = this.props.saveSocketInReducer;
-        const history = this.props.history;
         socket.on('connect', function() {
             saveSocketInReducer(this);
             socket.emit('connect_player', {user_id: user_id});
         });
-        socket.on('connected_player', function(msg){
-            history.push("/gameLobby");
+        socket.on('connected_player', msg => {
+            this.props.history.push("/gameLobby");
         });
         // socket.on('ready_to_start', function(msg){
         //     console.log('ready_to_start', msg);

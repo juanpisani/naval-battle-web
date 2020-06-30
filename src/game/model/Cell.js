@@ -75,6 +75,22 @@ class Cell extends Position{
             }
         }
     };
+
+    getBorders(){
+        const result = [];
+        result.push(
+            new Position(this.position.x - 1, this.position.y),
+            new Position(this.position.x - 1, this.position.y - 1),
+            new Position(this.position.x - 1, this.position.y + 1),
+            new Position(this.position.x, this.position.y - 1),
+            new Position(this.position.x, this.position.y + 1),
+            new Position(this.position.x + 1, this.position.y),
+            new Position(this.position.x + 1, this.position.y - 1),
+            new Position(this.position.x + 1, this.position.y + 1),
+        );
+        return result.filter(position => (10 > position.x) && (position.x >= 0) &&
+            (10 > position.y) && (position.y >= 0));
+    }
 }
 
 export default Cell;
