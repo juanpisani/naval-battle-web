@@ -8,16 +8,21 @@ export default class GameLobbyScreen extends Component {
 
     componentWillMount() {
         !this.props.isLoggedIn && this.props.history.push("/");
-        const history = this.props.history;
-        const startGame = this.props.startGame;
-        this.props.socket.on('ready_to_start', function(msg){
-            startGame(msg.player_1, msg.player_2, msg.game);
+        this.props.socket.on('ready_to_start', msg => {
+            this.props.startGame(msg.player_1, msg.player_2, msg.game);
         });
-        this.props.socket.on('room_update', function(msg){
+        this.props.socket.on('room_update', msg => {
             console.log('room_update', msg);
         });
         this.props.socket.on('ready_for_setup', function(msg){
-            history.push("/setPieces")
+            this.props.history.push("/setPieces")
+        });
+        this.props.socket.on('game_ended', msg => {
+            console.log('game_ended', msg);
+            alert(msg.winner.user_id === this.props.userId ? "You win" : "You lose");
+        });
+        window.addEventListener("beforeunload", ev => {
+            this.props.socket.emit("left_room", {game_id: this.props.gameId, user_id: this.props.userId});
         });
     }
 

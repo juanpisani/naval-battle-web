@@ -7,6 +7,8 @@ export const BACKEND_LOGIN_RESPONSE = "BACKEND_LOGIN_RESPONSE";
 export const START_GAME = "START_GAME";
 export const SAVE_SOCKET = "SAVE_SOCKET";
 
+export const LOGOUT = "LOGOUT";
+
 export const sessionActions = {
 
     loginGoogleResponse: (response) => ({type: GOOGLE_LOGIN_RESPONSE, response: response}),
@@ -18,4 +20,6 @@ export const sessionActions = {
     startGame: (playerOne, playerTwo, gameId) => ({type: START_GAME, playerOne: playerOne,
         playerTwo: playerTwo, gameId: gameId}),
     saveSocketInReducer: (socket) => ({type: SAVE_SOCKET, socket: socket}),
+
+    logout: () => ({type: LOGOUT}),
 };

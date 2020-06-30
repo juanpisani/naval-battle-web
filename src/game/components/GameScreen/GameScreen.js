@@ -15,12 +15,12 @@ export class GameScreen extends Component {
                                                                this.props.opponentCells);
             this.props.updateCells(ownCells, opponentCells);
         });
-        this.props.socket.on('game_ended', msg => {
-            console.log('game_ended', msg);
-            alert(msg.user_id == this.props.userId ? "You win" : "You lose");
-        });
         this.props.socket.on('player_turn', msg => {
             this.props.changeTurn(msg.user_id === this.props.userId);
+        });
+        this.props.socket.on('game_ended', msg => {
+            console.log('game_ended', msg);
+            alert(msg.winner.user_id === this.props.userId ? "You win" : "You lose");
         });
         window.addEventListener("beforeunload", ev => {
             this.props.socket.emit("left_room", {game_id: this.props.gameId, user_id: this.props.userId});

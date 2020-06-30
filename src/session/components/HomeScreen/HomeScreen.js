@@ -7,7 +7,6 @@ import io from 'socket.io-client';
 
 class HomeScreen extends Component {
 
-    //todo logout
     componentWillMount() {
         !this.props.isLoggedIn && this.props.history.push("/");
     }
@@ -23,9 +22,6 @@ class HomeScreen extends Component {
         socket.on('connected_player', msg => {
             this.props.history.push("/gameLobby");
         });
-        // socket.on('ready_to_start', function(msg){
-        //     console.log('ready_to_start', msg);
-        // });
     }
 
     render() {
@@ -48,6 +44,9 @@ class HomeScreen extends Component {
                         </Card.Body>
                     </Card>
                 </div>
+                <Button variant="light" size="lg" onClick={() => {this.props.logout(); this.props.history.push("/");}}>
+                    <h3 style={{color:"lightskyblue"}}>Logout</h3>
+                </Button>
             </div>
         </div>);
     }

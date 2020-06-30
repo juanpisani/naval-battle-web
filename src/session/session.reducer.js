@@ -1,6 +1,6 @@
 import {
     BACKEND_LOGIN_ERROR,
-    BACKEND_LOGIN_RESPONSE,
+    BACKEND_LOGIN_RESPONSE, LOGOUT,
     SAVE_SOCKET,
     START_GAME
 } from "./session.actions";
@@ -31,18 +31,6 @@ const initialState = {
             email: "",
         }
     }
-    // game: {
-    //     id: "999999",
-    //     opponentReady: true,
-    //     playerOne: {
-    //         id: "10000",
-    //         email: "player1@mail.com",
-    //     },
-    //     playerTwo: {
-    //         id: "10001",
-    //         email: "player2@mail.com",
-    //     }
-    // },
 };
 
 const session = (state = initialState, action) => {
@@ -86,6 +74,34 @@ const session = (state = initialState, action) => {
             return{
                 ...state,
                 socket: action.socket
+            };
+        case LOGOUT:
+            return{
+                token: undefined,
+                user: {},
+                socket: {},
+                isLoggedIn: false,
+                loginStatus: {
+                    success: false,
+                    error: false
+                },
+                registerToPlayStatus:{
+                    success: false,
+                    error: false,
+                    loading: false,
+                },
+                game: {
+                    id: "",
+                    opponentReady: false,
+                    playerOne: {
+                        id: "",
+                        email: "",
+                    },
+                    playerTwo: {
+                        id: "",
+                        email: "",
+                    }
+                }
             };
         default:
             return state

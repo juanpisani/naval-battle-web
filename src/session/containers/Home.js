@@ -14,6 +14,9 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = dispatch => ({
     saveSocketInReducer: (socket) => {
         dispatch(sessionActions.saveSocketInReducer(socket));
+    },
+    logout: () => {
+        dispatch(sessionActions.logout());
     }
 });
 
