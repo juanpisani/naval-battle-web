@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://127.0.0.1:5000/api/";
+const baseUrl = "http://ec2-54-237-31-62.compute-1.amazonaws.com:5000/api/";
 
 //todo arreglar token y hhttputils
 
