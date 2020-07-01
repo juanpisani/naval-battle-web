@@ -73,7 +73,7 @@ export class SetupScreen extends Component {
             const {ships} = this.state;
             for (let i = 0; i < ships.length; ++i) {
                 if (ships[i].id === +shipId) {
-                    ships[i].move(0, 0);
+                    ships[i].move(-1, -1);
                     this.setState({ships, currentShip: ships[i]});
                     break;
                 }
@@ -140,14 +140,6 @@ export class SetupScreen extends Component {
                                     </div>
                                     <div className="h-container__col">
                                         <ShipList ships={ships}/>
-                                        <ul className="brief">
-                                            <li>
-                                                <b>move</b> - drag and drop
-                                            </li>
-                                            <li>
-                                                <b>rotate</b> - select and press space
-                                            </li>
-                                        </ul>
                                     </div>
                                 </div>
                                 <div>

@@ -131,7 +131,6 @@ const session = (state = initialState, action) => {
                 }
             };
         case GET_MY_STATS_RESPONSE:
-            debugger;
             return {
                 ...state,
                 stats: {

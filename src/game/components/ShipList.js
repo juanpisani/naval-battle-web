@@ -20,7 +20,6 @@ const ShipList = ({ ships }) => {
         <div className="ship-list">
             {Object.values(categories).map((category) => (
                 <div key={`ship-row-${category.type}`} className="ship-list__row">
-                    <div className="ship-list__row__label">{category.type}</div>
                     {category.ships.map((ship) => (
                         <Ship key={`ship-${ship.id}`} ship={ship} />
                     ))}

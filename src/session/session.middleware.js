@@ -21,7 +21,6 @@ const sessionMiddleware = ({ dispatch, getState }) => next => {
                 console.log(action);
                 break;
             case GET_MY_STATS_REQUEST:
-                debugger;
                 services.getMyStats(getState().session.user.id)
                     .then((res) => {
                         dispatch(actions.session.getMyStatsResponse(res));
