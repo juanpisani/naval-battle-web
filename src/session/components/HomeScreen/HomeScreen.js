@@ -48,7 +48,7 @@ class HomeScreen extends Component {
                                     color: '#F3C7C7',
                                     fontFamily: 'Titillium Web',
                                     marginTop: '8px'
-                                }}>BATTLESHIP</h3>
+                                }}>BATALLA NAVAL</h3>
                             </div>
                         </Paper>
                         </div>

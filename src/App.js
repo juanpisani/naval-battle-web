@@ -19,7 +19,7 @@ function App() {
                     <PrivateRoute exact path='/gameLobby' component={GameLobby}/>
                     <PrivateRoute exact path='/setPieces' component={Setup}/>
                     <PrivateRoute exact path='/game' component={Game}/>
-                    <PrivateRoute exact path='/results' component={Result}/>
+                    <Route exact path='/results' component={Result}/>
                 </Switch>
             </Router>
         </div>

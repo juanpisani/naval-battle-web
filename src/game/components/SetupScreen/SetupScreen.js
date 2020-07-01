@@ -128,7 +128,7 @@ export class SetupScreen extends Component {
                 <Card>
                     <Card.Body>
                         <Card.Title>
-                            <p style={{color: "blue"}}>BATTLESHIPS</p>
+                            <p style={{color: "blue"}}>BATALLA NAVALS</p>
                         </Card.Title>
                         <div>
                             <Card.Title>SETUP

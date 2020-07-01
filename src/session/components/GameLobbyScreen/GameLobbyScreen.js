@@ -50,7 +50,7 @@ export default class GameLobbyScreen extends Component {
                                         color: '#F3C7C7',
                                         fontFamily: 'Titillium Web',
                                         marginTop: '8px'
-                                    }}>BATTLESHIP</h3>
+                                    }}>BATALLA NAVAL</h3>
                                 </div>
                             </Paper>
                         </div>
@@ -76,7 +76,7 @@ export default class GameLobbyScreen extends Component {
                                                 color: '#F3C7C7',
                                                 fontFamily: 'Titillium Web',
                                                 marginTop: '8px'}}>
-                                                Empezar!
+                                                EMPEZAR!
                                             </h3>
                                         </Button>
                                     </div>
@@ -92,7 +92,7 @@ export default class GameLobbyScreen extends Component {
                                         color: '#2E2E2E',
                                         fontFamily: 'Titillium Web',
                                         marginTop: '15px'
-                                    }}>Waiting for an opponent</h3>
+                                    }}>ESPERANDO UN OPONENTE</h3>
                                 </div>
                                 <div style={{
                                     display: 'flex',

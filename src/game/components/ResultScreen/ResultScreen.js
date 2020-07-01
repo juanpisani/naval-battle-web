@@ -1,36 +1,105 @@
 import React, {Component} from "react";
-import {Button, Card} from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.css';
+import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
 
 
 class ResultScreen extends Component {
 
     render() {
-        let {user} = this.props;
-        return (<div>
-            <div>
-                <div>
-                    <Card>
-                        <Card.Body>
-                            <Card.Title>
-                                <p style={{color:"blue"}}>Battleship</p>
-                            </Card.Title>
-                            <Card.Title>Results</Card.Title>
-                            <div>
+        return (
+            <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#2E2E2E',
+                height: '100vh',
+            }}>
+                <div style={{width: '80%'}}>
+                    <Paper style={{backgroundColor: '#FAE4E4'}} elevation={3}>
+                        <div style={{padding: '1%'}}>
+                            <Paper style={{backgroundColor: '#2E2E2E', height: '100hv'}} elevation={6}>
+                                <div style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>
+                                    <h3 style={{
+                                        color: '#F3C7C7',
+                                        fontFamily: 'Titillium Web',
+                                        marginTop: '8px'
+                                    }}>BATALLA NAVAL</h3>
+                                </div>
+                            </Paper>
+                        </div>
+                    </Paper>
+                    <div>
+                        <Paper style={{backgroundColor: '#FAE4E4'}} elevation={3}>
+                            <div style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                height: '30vh',
+                            }}>
                                 {this.props.isWinner ?
-                                    <h1 style={{color: "black"}}>CONGRATULATIONS {user.name?.toUpperCase()}, YOU WON</h1>
-                                    :
-                                    <h1 style={{color: "black"}}>Better luck next time {user.name?.toUpperCase()}, you lost</h1>
+                                    <div>
+                                        <h3 style={{
+                                            color: '#2E2E2E',
+                                            fontFamily: 'Titillium Web',
+                                            marginTop: '8px',
+                                            textAlign: 'center'
+                                        }}>HAS GANADO! </h3>
+                                        <h3 style={{
+                                            color: '#2E2E2E',
+                                            fontFamily: 'Titillium Web',
+                                            marginTop: '8px',
+                                            textAlign: 'center'
+                                        }}>FELICITACIONES ESTIMADO </h3>
+                                        <h3 style={{
+                                            color: '#2E2E2E',
+                                            fontFamily: 'Titillium Web',
+                                            marginTop: '8px',
+                                            textAlign: 'center'
+                                        }}>{this.props.user.name?.toUpperCase()}
+                                        </h3>
+                                    </div> :
+                                    <div>
+                                        <h3 style={{
+                                            color: '#2E2E2E',
+                                            fontFamily: 'Titillium Web',
+                                            marginTop: '8px',
+                                            textAlign: 'center'
+                                        }}>PERDISTE! </h3>
+                                        <h3 style={{
+                                            color: '#2E2E2E',
+                                            fontFamily: 'Titillium Web',
+                                            marginTop: '8px',
+                                            textAlign: 'center'
+                                        }}>NO HAY PROBLEMA, PEOR ES DESCENDER</h3>
+                                        <h3 style={{
+                                            color: '#2E2E2E',
+                                            fontFamily: 'Titillium Web',
+                                            marginTop: '8px',
+                                            textAlign: 'center'
+                                        }}>{this.props.user.name?.toUpperCase()}
+                                        </h3>
+                                    </div>
                                 }
-                                <Button variant="light" size="lg" onClick={() => {this.props.deleteGameRoomAndSocket(); this.props.history.push("/home");}}>
-                                    <h3 style={{color:"lightskyblue"}}>Back to home</h3>
-                                </Button>
                             </div>
-                        </Card.Body>
-                    </Card>
+                        </Paper>
+                    </div>
+                    <div style={{display: 'flex', justifyContent: 'center', marginTop: '5%'}}>
+                        <div style={{backgroundColor: '#FAE4E4', borderRadius: '5%'}}>
+                            <Button style={{borderRadius: 50}}
+                                    onClick={() => {
+                                        this.props.deleteGameRoomAndSocket();
+                                        this.props.history.push("/home");
+                                    }}>
+                                <h3>GO BACK</h3>
+                            </Button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>);
+            </div>);
     }
 }
 

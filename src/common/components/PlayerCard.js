@@ -13,7 +13,7 @@ export const PlayerCard = (player) => {
                     color: '#F3C7C7',
                     fontFamily: 'Titillium Web',
                     marginTop: '8px'
-                }}>{player.player.name}</h5>
+                }}>{player.player.name.toUpperCase()}</h5>
             </div>
             <div style={{
                 display: 'flex',
