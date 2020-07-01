@@ -17,7 +17,7 @@ function App() {
                     <Route exact path='/' component={Login}/>
                     <PrivateRoute exact path='/home' component={Home}/>
                     <PrivateRoute exact path='/gameLobby' component={GameLobby}/>
-                    <Route exact path='/setPieces' component={Setup}/>
+                    <PrivateRoute exact path='/setPieces' component={Setup}/>
                     <PrivateRoute exact path='/game' component={Game}/>
                     <PrivateRoute exact path='/results' component={Result}/>
                 </Switch>

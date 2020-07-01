@@ -192,7 +192,6 @@ export class SetupScreen extends Component {
                                             </Button>
                                         )}
                                     </div>
-
                                 </div>
                             </div>
                         </Paper>
