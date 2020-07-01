@@ -4,6 +4,7 @@ export const CHANGE_TURN = "CHANGE_TURN";
 export const PROCESSING_SHOT = "PROCESSING_SHOT";
 export const UPDATE_CELLS = "UPDATE_CELLS";
 export const IS_WINNER = "IS_WINNER";
+export const DELETE_PREVIOUS_GAME_INFO = "DELETE_PREVIOUS_GAME_INFO";
 
 
 export const gameActions = {
@@ -13,4 +14,5 @@ export const gameActions = {
     processingShot: (processingShot) => ({type: PROCESSING_SHOT, processingShot:processingShot}),
     updateCells: (ownCells, opponentCells) => ({type: UPDATE_CELLS, ownCells: ownCells, opponentCells: opponentCells}),
     isWinner: (result) => ({type: IS_WINNER, result: result}),
+    deletePreviousGameInfo: () => ({type: DELETE_PREVIOUS_GAME_INFO}),
 };

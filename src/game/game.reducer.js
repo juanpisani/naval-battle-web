@@ -1,5 +1,5 @@
 import {
-    CHANGE_TURN,
+    CHANGE_TURN, DELETE_PREVIOUS_GAME_INFO,
     GAME_STARTED,
     IS_WINNER,
     PROCESSING_SHOT,
@@ -42,6 +42,17 @@ const game = (state = initialState, action) => {
             return {
                 ...state,
                 isWinner: action.result
+            };
+        case DELETE_PREVIOUS_GAME_INFO:
+            return {
+                ...state,
+                ownCells: {},
+                opponentCells: {},
+                isMyTurn: false,
+                x: 0,
+                y: 0,
+                isProcessingShot: false,
+                isWinner: false,
             };
         default:
             return state;
