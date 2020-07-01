@@ -21,7 +21,11 @@ export default class GameLobbyScreen extends Component {
             this.props.history.push("/results")
         });
         window.addEventListener("beforeunload", ev => {
-            this.props.socket.emit("left_room", {game_id: this.props.gameId, user_id: this.props.user.id});
+            if(this.props.opponentReady) {
+                this.props.socket.emit("left_room", {game_id: this.props.gameId, user_id: this.props.user.id});
+            } else {
+                this.props.socket.emit("left_queue", {user_id: this.props.user.id});
+            }
         });
     }
 
