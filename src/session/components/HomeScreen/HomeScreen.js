@@ -88,12 +88,12 @@ class HomeScreen extends Component {
                                 this.props.logout();
                                 this.props.history.push("/");
                             }}>
-                                <h3>Logout</h3>
+                                <h3>SALIR</h3>
                             </Button>
                         </div>
                         <div style={{backgroundColor: '#FAE4E4', borderRadius: '5%'}}>
                             <Button onClick={() => this.handleClick()}>
-                                <h3>PLAY</h3>
+                                <h3>JUGAR</h3>
                             </Button>
                         </div>
                     </div>
