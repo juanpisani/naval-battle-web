@@ -2,7 +2,6 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import HomeScreen from "../components/HomeScreen/HomeScreen";
 import {sessionActions} from "../session.actions";
-import actions from "../../index";
 
 const mapStateToProps = (state, ownProps) => ({
     user            :   state.session.user,
@@ -21,7 +20,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(sessionActions.logout());
     },
     getMyStatsRequest: () => {
-        dispatch(actions.session.getMyStatsRequest());
+        dispatch(sessionActions.getMyStatsRequest());
     }
 });
 
