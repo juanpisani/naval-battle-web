@@ -6,6 +6,7 @@ import {gameActions} from "../game.actions";
 
 const mapStateToProps = (state, ownProps) => ({
     user              :   state.session.user,
+    socket            :   state.session.socket,
     gameId            :   state.session.game.id,
     isWinner          :   state.game.isWinner,
     isLoggedIn        :   state.session.isLoggedIn,
