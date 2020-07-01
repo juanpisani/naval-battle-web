@@ -14,7 +14,6 @@ class HomeScreen extends Component {
     }
 
     async handleClick() {
-        debugger;
         const user_id = this.props.user.id;
         const socket = io(config.API_PATH);
         const saveSocketInReducer = this.props.saveSocketInReducer;
@@ -76,7 +75,7 @@ class HomeScreen extends Component {
                                         </div>
                                     </div>)
                                     :
-                                    (<div style={{display:'flex', justifyContent: 'space-between', alignItems: 'center',
+                                    (<div style={{display:'flex', justifyContent: 'center', alignItems: 'center',
                                         marginTop: '5%', padding: '5%'}}>
                                         <PlayerCard player={this.props.user}/>
                                     </div>)

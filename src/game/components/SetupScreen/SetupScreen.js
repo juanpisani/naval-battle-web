@@ -5,7 +5,8 @@ import ShipList from "../ShipList";
 import Ship from "../../model/Ship";
 import Cell from "../../model/Cell";
 import '../styles/GameStyle.css'
-import {Card} from "react-bootstrap";
+import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
 
 export class SetupScreen extends Component {
 
@@ -124,41 +125,79 @@ export class SetupScreen extends Component {
         const {ships, cells, currentShip} = this.state;
 
         return (
-            <div>
-                <Card>
-                    <Card.Body>
-                        <Card.Title>
-                            <p style={{color: "blue"}}>BATALLA NAVALS</p>
-                        </Card.Title>
-                        <div>
-                            <Card.Title>SETUP
-                            </Card.Title>
-                            <div className="page v-container">
-                                <div className="h-container">
-                                    <div className="h-container__col">
-                                        <Battlefield cells={cells}/>
-                                    </div>
-                                    <div className="h-container__col">
-                                        <ShipList ships={ships}/>
-                                    </div>
+            <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#2E2E2E',
+                height: '100vh'
+            }}>
+                <div style={{width: '80%'}}>
+                    <Paper style={{backgroundColor: '#FAE4E4', minWidth: '800px'}} elevation={3}>
+                        <div style={{padding: '1%'}}>
+                            <Paper style={{backgroundColor: '#2E2E2E', height: '100hv'}} elevation={6}>
+                                <div style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>
+                                    <h3 style={{
+                                        color: '#F3C7C7',
+                                        fontFamily: 'Titillium Web',
+                                        marginTop: '8px'
+                                    }}>BATALLA NAVAL</h3>
                                 </div>
-                                <div>
-                                    {this.isReadyToPlay && (
-                                        <button onClick={this.handlePlayClick}>Battle!</button>
-                                    )}
-                                </div>
-                                <DragAndDropCursor
-                                    currentShip={currentShip}
-                                    onMouseDown={this.handleMouseDown}
-                                    onMouseUp={this.handleMouseUp}
-                                    onRotateShip={this.handleRotateShip}
-                                />
-                                <button onClick={this.handleRandomSetUp}>Random</button>
-                            </div>
+                            </Paper>
                         </div>
-                    </Card.Body>
-                </Card>
-            </div>
-        );
+                    </Paper>
+                    <div>
+                        <Paper style={{backgroundColor: '#FAE4E4', minWidth: '800px'}} elevation={3}>
+                            <div style={{
+                                display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                                <div className="page v-container">
+                                    <div className="h-container">
+                                        <div className="h-container__col">
+                                            <Battlefield cells={cells}/>
+                                        </div>
+                                        <div className="h-container__col">
+                                            <ShipList ships={ships}/>
+                                        </div>
+                                    </div>
+                                    <DragAndDropCursor
+                                        currentShip={currentShip}
+                                        onMouseDown={this.handleMouseDown}
+                                        onMouseUp={this.handleMouseUp}
+                                        onRotateShip={this.handleRotateShip}
+                                    />
+                                    <div style={{
+                                        display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                                        <Button style={{borderRadius: 20, backgroundColor: '#2E2E2E', marginRight: '20%'}}
+                                                onClick={this.handleRandomSetUp}>
+                                            <h3 style={{
+                                                color: '#F3C7C7',
+                                                fontFamily: 'Titillium Web',
+                                                marginTop: '8px'}}>
+                                                ALEATORIO!
+                                            </h3>
+                                        </Button>
+                                        {this.isReadyToPlay && (
+                                            <Button style={{borderRadius: 20, backgroundColor: '#2E2E2E'}}
+                                                    onClick={this.handlePlayClick}>
+                                                <h3 style={{
+                                                    color: '#F3C7C7',
+                                                    fontFamily: 'Titillium Web',
+                                                    marginTop: '8px'}}>
+                                                    BATALLA!
+                                                </h3>
+                                            </Button>
+                                        )}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </Paper>
+                    </div>
+                </div>
+            </div>);
     }
 }
