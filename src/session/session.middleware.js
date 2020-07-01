@@ -8,16 +8,20 @@ const sessionMiddleware = ({ dispatch, getState }) => next => {
         next(action);
         switch (action.type) {
             case GOOGLE_LOGIN_RESPONSE:
+                debugger;
                 services.backEndLogin(action.response.tokenId)
                     .then((res) => {
                         dispatch(actions.session.backEndResponse(res));
-                        dispatch(actions.session.getMyHistoryRequest());
+                        dispatch(actions.session.getMyStatsRequest());
                     })
                     .catch(error => {
+                        debugger;
+                        console.log(error);
                         dispatch(actions.session.backEndLoginError(error));
                     });
                 break;
             case GOOGLE_LOGIN_ERROR:
+                debugger;
                 console.log(action);
                 break;
             case GET_MY_STATS_REQUEST:
