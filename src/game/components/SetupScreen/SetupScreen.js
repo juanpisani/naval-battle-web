@@ -12,8 +12,16 @@ export class SetupScreen extends Component {
     state = {
         currentShip: null,
         ships: Ship.generate(),
-        cells: Cell.generate()
+        cells: Cell.generateNewCells()
     };
+
+    // componentWillUnmount() {
+    //     this.state = {
+    //         currentShip: null,
+    //         ships: Ship.generate(),
+    //         cells: Cell.generateNewCells()
+    //     };
+    // }
 
     componentWillMount() {
         this.props.socket.on('users_boards_received', msg => {
@@ -31,10 +39,11 @@ export class SetupScreen extends Component {
         });
     }
 
+
     sendBoard(gameId, ships, userId) {
         const board = this.getPositionJson(ships);
         this.props.socket.emit('setup_board', {user_id: userId, game_id: gameId, board: board});
-        this.props.gameStarted(this.state.cells, Cell.generate());
+        this.props.gameStarted(this.state.cells, Cell.generateNewCells());
     }
 
     getPositionJson(ships) {
@@ -112,7 +121,7 @@ export class SetupScreen extends Component {
 
     handleRandomSetUp = () => {
         let ships = Ship.generate();
-        let cells = Cell.generate();
+        let cells = Cell.generateNewCells();
         ships.forEach(ship => {
             Ship.setPositionRandomly(ship, cells);
             Cell.updateCells(cells, ships);

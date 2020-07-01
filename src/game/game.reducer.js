@@ -23,6 +23,7 @@ const game = (state = initialState, action) => {
             return action.positions;
         case GAME_STARTED:
         case UPDATE_CELLS:
+            debugger;
             return {
                 ...state,
                 ownCells: action.ownCells,
@@ -52,7 +53,6 @@ const game = (state = initialState, action) => {
                 x: 0,
                 y: 0,
                 isProcessingShot: false,
-                isWinner: false,
             };
         default:
             return state;

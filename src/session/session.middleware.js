@@ -11,7 +11,7 @@ const sessionMiddleware = ({ dispatch, getState }) => next => {
                 services.backEndLogin(action.response.tokenId)
                     .then((res) => {
                         dispatch(actions.session.backEndResponse(res));
-                        dispatch(actions.session.getMyHistoryRequest());
+                        dispatch(actions.session.getMyStatsRequest());
                     })
                     .catch(error => {
                         dispatch(actions.session.backEndLoginError(error));

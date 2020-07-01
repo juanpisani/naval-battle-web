@@ -2,6 +2,8 @@ import {gameActions} from "../game.actions";
 import {connect} from "react-redux";
 import {SetupScreen} from "../components/SetupScreen/SetupScreen";
 import {withRouter} from "react-router-dom";
+import Ship from "../model/Ship";
+import Cell from "../model/Cell";
 
 const mapStateToProps = (state, ownProps) => ({
     userId            :   state.session.user.id,

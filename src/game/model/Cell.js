@@ -91,6 +91,19 @@ class Cell extends Position{
         return result.filter(position => (10 > position.x) && (position.x >= 0) &&
             (10 > position.y) && (position.y >= 0));
     }
+
+    static generateNewCells() {
+        const result = new Map();
+
+        for (let y = 0; y < 10; ++y) {
+            for (let x = 0; x < 10; ++x) {
+                let cell = new Cell(x,y);
+                cell.state = CellStates.Empty;
+                result.set(`${x}:${y}`, cell);
+            }
+        }
+        return result;
+    }
 }
 
 export default Cell;

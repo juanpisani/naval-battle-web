@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {Button, Card} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.css';
-import Cell from "../../model/Cell";
 
 
 class ResultScreen extends Component {
