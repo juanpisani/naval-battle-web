@@ -43,7 +43,7 @@ class LoginScreen extends Component {
                                     clientId='168742262050-ojjs8no69pmvclfjmc1h110drusu7gf7.apps.googleusercontent.com'
                                     buttonText='Login with Google'
                                     onSuccess={(response) => this.successLogin(response)}
-                                    onFailure={() => this.errorLogin()}>
+                                    onFailure={(error) => {console.log(error); this.errorLogin();}}>
                                 </GoogleLogin>
                                 {loginStatus.error && <p>Login failed</p>}
                             </div>
