@@ -1,10 +1,9 @@
 import React, {Component} from "react";
-import {Card} from "react-bootstrap";
 import {PlayerCard} from "../../../common/components/PlayerCard";
 import Button from "@material-ui/core/Button";
+import Paper from "@material-ui/core/Paper";
 
 export default class GameLobbyScreen extends Component {
-    //TODO TENER EL ID DE LA SESSION EN LA URL PARA PODER JUGAR VARIOS JUEGOS Y REFRESHEAR
 
     componentWillMount() {
         this.props.socket.on('ready_to_start', msg => {
@@ -31,34 +30,82 @@ export default class GameLobbyScreen extends Component {
 
     render() {
         return (
-            <div>
-                <Card>
-                    <Card.Body>
-                        <Card.Title>
-                            <p style={{color:"blue"}}>Battleship</p>
-                        </Card.Title>
-                            {this.props.opponentReady ?
-                                <div>
-                                    <Card.Title>GAME {this.props.roomId}
-                                    </Card.Title>
-                                    <div style={{display: "flex", justifyContent: "space-between", flexDirection: "row"}}>
-                                        <PlayerCard player={this.props.playerOne} />
-                                        <PlayerCard player={this.props.playerTwo} />
-                                        <Button onClick={() => this.readyToPlay(this.props.user.id, this.props.gameId)}>
-                                            Empezar!
+            <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#2E2E2E',
+                height: '100vh'
+            }}>
+                <div style={{width: '80%'}}>
+                    <Paper style={{backgroundColor: '#FAE4E4'}} elevation={3}>
+                        <div style={{padding: '1%'}}>
+                            <Paper style={{backgroundColor: '#2E2E2E', height: '100hv'}} elevation={6}>
+                                <div style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>
+                                    <h3 style={{
+                                        color: '#F3C7C7',
+                                        fontFamily: 'Titillium Web',
+                                        marginTop: '8px'
+                                    }}>BATTLESHIP</h3>
+                                </div>
+                            </Paper>
+                        </div>
+                    </Paper>
+                    <div>
+                        {this.props.opponentReady ?
+                            <Paper style={{backgroundColor: '#FAE4E4'}} elevation={3}>
+                                <div style={{
+                                    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                                    marginTop: '5%', padding: '5%', marginLeft: '5%', marginRight: '5%'
+                                }}>
+                                    <PlayerCard player={this.props.playerOne}/>
+                                    <PlayerCard player={this.props.playerTwo}/>
+                                </div>
+                                <div style={{
+                                    display: 'flex', justifyContent: 'center', alignItems: 'center',
+                                    marginTop: '5%', padding: '5%'
+                                }}>
+                                    <div style={{backgroundColor: '#2E2E2E', borderRadius: '5%'}}>
+                                        <Button style={{ borderRadius: 50 }}
+                                                onClick={() => this.readyToPlay(this.props.user.id, this.props.gameId)}>
+                                            <h3 style={{
+                                                color: '#F3C7C7',
+                                                fontFamily: 'Titillium Web',
+                                                marginTop: '8px'}}>
+                                                Empezar!
+                                            </h3>
                                         </Button>
                                     </div>
                                 </div>
-                                :
-                                <div>
-                                    <Card.Title>Waiting for an opponent</Card.Title>
-                                    <img style={{width:"20%", height:"20%", marginTop:"8%", marginBottom:"10%"}}
-                                         src={require('../../../assets/waiting.gif')} alt="waiting..." />
+                            </Paper> :
+                            <Paper style={{backgroundColor: '#FAE4E4', height: '100hv'}} elevation={6}>
+                                <div style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>
+                                    <h3 style={{
+                                        color: '#2E2E2E',
+                                        fontFamily: 'Titillium Web',
+                                        marginTop: '15px'
+                                    }}>Waiting for an opponent</h3>
                                 </div>
-                            }
-                    </Card.Body>
-                </Card>
-            </div>
-        );
+                                <div style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>
+                                    <img style={{width: "20%", height: "20%", marginTop: "8%", marginBottom: "10%"}}
+                                         src={require('../../../assets/loading.gif')} alt="waiting..."/>
+                                </div>
+                            </Paper>
+                        }
+                    </div>
+                </div>
+            </div>);
     }
 }

@@ -14,6 +14,7 @@ class HomeScreen extends Component {
     }
 
     async handleClick() {
+        debugger;
         const user_id = this.props.user.id;
         const socket = io(config.API_PATH);
         const saveSocketInReducer = this.props.saveSocketInReducer;
@@ -54,43 +55,46 @@ class HomeScreen extends Component {
                     </Paper>
                     <div>
                         <Paper style={{backgroundColor: '#FAE4E4'}} elevation={3}>
-                            <div style={{display:'flex', justifyContent: 'space-between', alignItems: 'center',
-                                marginTop: '5%', padding: '5%'}}>
-                            <PlayerCard player={this.props.user}/>
                             {
                                 this.props.stats.wins > 0 || this.props.stats.loses > 0 ?
-                                    <div style={{width: "20%", height: "20%"}}>
-                                        <PieChart
-                                            data={[
-                                                {value: this.props.stats.wins, color: '#3A7C37', label: "Wins",},
-                                                {value: this.props.stats.loses, color: '#C43838', label: "Loses"},
-                                            ]}
-                                            totalValue={this.props.stats.wins + this.props.stats.loses}
-                                            label={({dataEntry}) => dataEntry.value > 0 ? dataEntry.label + ": " + dataEntry.value : ""}
-                                            labelStyle={{
-                                                fontFamily: 'Titillium Web',
-                                                fontSize: '12px',
-                                            }}
-                                        />
-                                    </div>
+                                    (<div style={{display:'flex', justifyContent: 'space-between', alignItems: 'center',
+                                        marginTop: '5%', padding: '5%'}}>
+                                        <PlayerCard player={this.props.user}/>
+                                        <div style={{width: "20%", height: "20%"}}>
+                                            <PieChart
+                                                data={[
+                                                    {value: this.props.stats.wins, color: '#3A7C37', label: "Wins",},
+                                                    {value: this.props.stats.loses, color: '#C43838', label: "Loses"},
+                                                ]}
+                                                totalValue={this.props.stats.wins + this.props.stats.loses}
+                                                label={({dataEntry}) => dataEntry.value > 0 ? dataEntry.label + ": " + dataEntry.value : ""}
+                                                labelStyle={{
+                                                    fontFamily: 'Titillium Web',
+                                                    fontSize: '12px',
+                                                }}
+                                            />
+                                        </div>
+                                    </div>)
                                     :
-                                    null
+                                    (<div style={{display:'flex', justifyContent: 'space-between', alignItems: 'center',
+                                        marginTop: '5%', padding: '5%'}}>
+                                        <PlayerCard player={this.props.user}/>
+                                    </div>)
                             }
-                            </div>
                         </Paper>
                     </div>
                     <div style={{display:'flex', justifyContent: 'space-between', marginTop: '5%'}}>
-                        <div style={{backgroundColor: '#FAE4E4', borderRadius: '5%'}}>
-                            <Button onClick={() => this.handleClick()}>
-                                <h3>PLAY</h3>
-                            </Button>
-                        </div>
                         <div style={{backgroundColor: '#FAE4E4', borderRadius: '5%'}}>
                             <Button style={{ borderRadius: 50 }} onClick={() => {
                                 this.props.logout();
                                 this.props.history.push("/");
                             }}>
                                 <h3>Logout</h3>
+                            </Button>
+                        </div>
+                        <div style={{backgroundColor: '#FAE4E4', borderRadius: '5%'}}>
+                            <Button onClick={() => this.handleClick()}>
+                                <h3>PLAY</h3>
                             </Button>
                         </div>
                     </div>
