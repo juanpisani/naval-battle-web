@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import GoogleLogin from "react-google-login";
-import 'bootstrap/dist/css/bootstrap.css';
 import Paper from "@material-ui/core/Paper";
 
 class LoginScreen extends Component {
