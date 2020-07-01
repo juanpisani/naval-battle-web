@@ -32,7 +32,7 @@ export class GameScreen extends Component {
         this.props.socket.emit('fire', {game_id: gameId, user_id: userId, x: x, y: y});
     }
 
-    randomShot() {
+    randomShot = () => {
         this.props.socket.emit('random_shot', {game_id: this.props.gameId, user_id: this.props.userId});
     }
 

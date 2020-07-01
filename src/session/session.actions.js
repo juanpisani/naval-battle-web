@@ -13,7 +13,7 @@ export const DELETE_GAME_ROOM_AND_SOCKET = "DELETE_GAME_ROOM_AND_SOCKET";
 export const GET_MY_STATS_REQUEST = "GET_MY_STATS_REQUEST";
 export const GET_MY_STATS_RESPONSE = "GET_MY_STATS_RESPONSE";
 
-
+export const READY_WAS_CLICKED = "READY_WAS_CLICKED";
 
 export const sessionActions = {
 
@@ -32,4 +32,6 @@ export const sessionActions = {
 
     getMyStatsRequest: () => ({type: GET_MY_STATS_REQUEST}),
     getMyStatsResponse: (response) => ({type: GET_MY_STATS_RESPONSE, response: response}),
+
+    readyWasClicked: () => ({type: READY_WAS_CLICKED})
 };

@@ -2,7 +2,7 @@ import {
     CHANGE_TURN,
     GAME_STARTED,
     IS_WINNER,
-    PROCESSING_SHOT,
+    PROCESSING_SHOT, SET_UP_IS_READY,
     UPDATE_CELLS,
     UPDATE_DISPOSITION_SUCCESS,
 } from "./game.actions";
@@ -15,6 +15,7 @@ const initialState = {
     y: 0,
     isProcessingShot: false,
     isWinner: false,
+    setUpClicked: false,
 };
 
 const game = (state = initialState, action) => {
@@ -41,7 +42,13 @@ const game = (state = initialState, action) => {
         case IS_WINNER:
             return {
                 ...state,
-                isWinner: action.result
+                isWinner: action.result,
+                setUpClicked: false,
+            };
+        case SET_UP_IS_READY:
+            return {
+                ...state,
+                setUpClicked: true,
             };
         default:
             return state;

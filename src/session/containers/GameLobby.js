@@ -13,6 +13,7 @@ const mapStateToProps = (state, ownProps) => ({
     playerOne            :   state.session.game.playerOne,
     playerTwo            :   state.session.game.playerTwo,
     socket               :   state.session.socket,
+    readyClicked         :   state.session.readyClicked,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -21,7 +22,10 @@ const mapDispatchToProps = dispatch => ({
     },
     isWinner: (result) => {
         dispatch(gameActions.isWinner(result));
-    }
+    },
+    readyWasClicked: () => {
+        dispatch(sessionActions.readyWasClicked());
+    },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(GameLobbyScreen));

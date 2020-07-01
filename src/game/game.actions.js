@@ -4,7 +4,7 @@ export const CHANGE_TURN = "CHANGE_TURN";
 export const PROCESSING_SHOT = "PROCESSING_SHOT";
 export const UPDATE_CELLS = "UPDATE_CELLS";
 export const IS_WINNER = "IS_WINNER";
-
+export const SET_UP_IS_READY = "SET_UP_IS_READY";
 
 export const gameActions = {
     updateDisposition: (positions) => ({type: UPDATE_DISPOSITION_SUCCESS, positions: positions}),
@@ -13,4 +13,5 @@ export const gameActions = {
     processingShot: (processingShot) => ({type: PROCESSING_SHOT, processingShot:processingShot}),
     updateCells: (ownCells, opponentCells) => ({type: UPDATE_CELLS, ownCells: ownCells, opponentCells: opponentCells}),
     isWinner: (result) => ({type: IS_WINNER, result: result}),
+    setUpIsReady: () => ({type: SET_UP_IS_READY}),
 };

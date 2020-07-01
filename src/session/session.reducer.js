@@ -4,7 +4,7 @@ import {
     SAVE_SOCKET,
     START_GAME,
     DELETE_GAME_ROOM_AND_SOCKET,
-    GET_MY_STATS_RESPONSE,
+    GET_MY_STATS_RESPONSE, READY_WAS_CLICKED,
 } from "./session.actions";
 
 const initialState = {
@@ -36,7 +36,8 @@ const initialState = {
             id: "",
             email: "",
         }
-    }
+    },
+    readyClicked: false,
 };
 
 const session = (state = initialState, action) => {
@@ -128,7 +129,8 @@ const session = (state = initialState, action) => {
                         id: "",
                         email: "",
                     }
-                }
+                },
+                readyClicked: false
             };
         case GET_MY_STATS_RESPONSE:
             return {
@@ -137,6 +139,11 @@ const session = (state = initialState, action) => {
                     wins: parseInt(action.response.data.wins),
                     loses: parseInt(action.response.data.loses)
                 },
+            };
+        case READY_WAS_CLICKED:
+            return {
+                ...state,
+                readyClicked: true
             };
         default:
             return state

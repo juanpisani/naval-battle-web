@@ -8,6 +8,7 @@ const mapStateToProps = (state, ownProps) => ({
     gameId            :   state.session.game.id,
     socket            :   state.session.socket,
     isLoggedIn        :   state.session.isLoggedIn,
+    setUpClicked      :   state.game.setUpClicked,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -19,7 +20,10 @@ const mapDispatchToProps = dispatch => ({
     },
     isWinner: (result) => {
         dispatch(gameActions.isWinner(result));
-    }
+    },
+    setUpIsReady: () => {
+        dispatch(gameActions.setUpIsReady());
+    },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SetupScreen));

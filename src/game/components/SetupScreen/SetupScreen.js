@@ -7,6 +7,7 @@ import Cell from "../../model/Cell";
 import '../styles/GameStyle.css'
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
+import LoadingButton from "../../../common/components/LoadingButton";
 
 export class SetupScreen extends Component {
 
@@ -153,43 +154,59 @@ export class SetupScreen extends Component {
                     <div>
                         <Paper style={{backgroundColor: '#FAE4E4', minWidth: '800px'}} elevation={3}>
                             <div style={{
-                                display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                                display: 'flex', justifyContent: 'center', alignItems: 'center'
+                            }}>
                                 <div className="page v-container">
-                                    <div className="h-container">
-                                        <div className="h-container__col">
-                                            <Battlefield cells={cells}/>
-                                        </div>
-                                        <div className="h-container__col">
-                                            <ShipList ships={ships}/>
-                                        </div>
-                                    </div>
-                                    <DragAndDropCursor
-                                        currentShip={currentShip}
-                                        onMouseDown={this.handleMouseDown}
-                                        onMouseUp={this.handleMouseUp}
-                                        onRotateShip={this.handleRotateShip}
-                                    />
+                                    {!this.props.setUpClicked && (
+                                        <div>
+                                            <div className="h-container">
+                                                <div className="h-container__col">
+                                                    <Battlefield cells={cells}/>
+                                                </div>
+                                                <div className="h-container__col">
+                                                    <ShipList ships={ships}/>
+                                                </div>
+                                            </div>
+                                            <DragAndDropCursor
+                                                currentShip={currentShip}
+                                                onMouseDown={this.handleMouseDown}
+                                                onMouseUp={this.handleMouseUp}
+                                                onRotateShip={this.handleRotateShip}
+                                            />
+                                        </div>)}
                                     <div style={{
-                                        display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                                        <Button style={{borderRadius: 20, backgroundColor: '#2E2E2E', marginRight: '20%'}}
-                                                onClick={this.handleRandomSetUp}>
-                                            <h3 style={{
-                                                color: '#F3C7C7',
-                                                fontFamily: 'Titillium Web',
-                                                marginTop: '8px'}}>
-                                                ALEATORIO!
-                                            </h3>
-                                        </Button>
-                                        {this.isReadyToPlay && (
-                                            <Button style={{borderRadius: 20, backgroundColor: '#2E2E2E'}}
-                                                    onClick={this.handlePlayClick}>
+                                        display: 'flex', justifyContent: 'center', alignItems: 'center'
+                                    }}>
+                                        {!this.props.setUpClicked && (
+                                            <Button style={{
+                                                borderRadius: 20,
+                                                backgroundColor: '#2E2E2E',
+                                                marginRight: '20%'
+                                            }}
+                                                    onClick={this.handleRandomSetUp}>
                                                 <h3 style={{
                                                     color: '#F3C7C7',
                                                     fontFamily: 'Titillium Web',
-                                                    marginTop: '8px'}}>
+                                                    marginTop: '8px'
+                                                }}>
+                                                    ALEATORIO!
+                                                </h3>
+                                            </Button>)}
+                                        {this.isReadyToPlay && (
+                                            <LoadingButton loading={this.props.setUpClicked}
+                                                           style={{borderRadius: 20, backgroundColor: '#2E2E2E'}}
+                                                           onClick={() => {
+                                                               this.props.setUpIsReady();
+                                                               this.handlePlayClick();
+                                                           }}>
+                                                <h3 style={{
+                                                    color: '#F3C7C7',
+                                                    fontFamily: 'Titillium Web',
+                                                    marginTop: '8px'
+                                                }}>
                                                     BATALLA!
                                                 </h3>
-                                            </Button>
+                                            </LoadingButton>
                                         )}
                                     </div>
                                 </div>

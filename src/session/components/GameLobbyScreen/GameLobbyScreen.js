@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {PlayerCard} from "../../../common/components/PlayerCard";
-import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
+import LoadingButton from "../../../common/components/LoadingButton";
 
 export default class GameLobbyScreen extends Component {
 
@@ -74,15 +74,16 @@ export default class GameLobbyScreen extends Component {
                                     marginTop: '5%', padding: '5%'
                                 }}>
                                     <div style={{backgroundColor: '#2E2E2E', borderRadius: '5%'}}>
-                                        <Button style={{ borderRadius: 50 }}
-                                                onClick={() => this.readyToPlay(this.props.user.id, this.props.gameId)}>
+                                        <LoadingButton loading={this.props.readyClicked} style={{ borderRadius: 50 }}
+                                                onClick={() => {this.props.readyWasClicked();
+                                                this.readyToPlay(this.props.user.id, this.props.gameId)}}>
                                             <h3 style={{
                                                 color: '#F3C7C7',
                                                 fontFamily: 'Titillium Web',
                                                 marginTop: '8px'}}>
                                                 EMPEZAR!
                                             </h3>
-                                        </Button>
+                                        </LoadingButton>
                                     </div>
                                 </div>
                             </Paper> :
